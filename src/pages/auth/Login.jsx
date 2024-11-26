@@ -1,27 +1,26 @@
-
+/* eslint-disable no-unused-vars */
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { loginUser } from '../../redux/reducers/user/authSlice';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 
 const Login = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
-  const userRole = useSelector((state) => state.auth.role); // Get the role from Redux state
+  const userRole = useSelector((state) => state.auth.role);
   const authError = useSelector((state) => state.auth.error);
 
   const [mobileNumber, setMobileNumber] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
 
-
   useEffect(() => {
     if (isAuthenticated) {
       if (userRole === 'admin') {
-        navigate('/admin'); 
+        navigate('/admin');
       } else {
-        navigate('/home'); 
+        navigate('/home');
       }
     }
   }, [isAuthenticated, userRole, navigate]);
@@ -29,7 +28,6 @@ const Login = () => {
   const handlePasswordLogin = async () => {
     try {
       await dispatch(loginUser({ mobileNumber, password }));
-      
     } catch (err) {
       setError('Login failed! Please check your credentials.');
     }
@@ -66,6 +64,18 @@ const Login = () => {
           >
             Login with Password
           </button>
+          
+          <div className="text-center pt-4">
+            <p className="text-gray-600">
+              {`Don't have an account?`}{' '}
+              <Link 
+                to="/register" 
+                className="text-blue-500 hover:text-blue-700 font-medium transition-colors"
+              >
+                Sign up here
+              </Link>
+            </p>
+          </div>
         </div>
       </div>
     </div>

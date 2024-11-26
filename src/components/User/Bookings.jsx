@@ -1,67 +1,3 @@
-// import React, { useState } from 'react';
-
-// const OrderHistoryPage = () => {
-//   // Sample data to simulate orders
-//   const [orders] = useState([
-//     {
-//       id: 1,
-//       productName: 'Wireless Headphones',
-//       orderDate: '2024-11-01',
-//       amount: '$120.00',
-//       status: 'Shipped',
-//     },
-//     {
-//       id: 2,
-//       productName: 'Smart Watch',
-//       orderDate: '2024-10-25',
-//       amount: '$250.00',
-//       status: 'Delivered',
-//     },
-//     {
-//       id: 3,
-//       productName: 'Laptop Bag',
-//       orderDate: '2024-09-15',
-//       amount: '$40.00',
-//       status: 'Pending',
-//     },
-//   ]);
-
-//   return (
-//     <div className="max-w-6xl mx-auto p-8 bg-white rounded-lg shadow-lg mt-10">
-//       <h2 className="text-3xl font-semibold text-center text-gray-800 mb-8">Your Order History</h2>
-
-//       {/* Orders Cards Container */}
-//       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-//         {orders.map((order) => (
-//           <div
-//             key={order.id}
-//             className="bg-white shadow-lg rounded-lg overflow-hidden transform hover:scale-105 transition-transform duration-300"
-//           >
-//             <div className="p-6">
-//               <h3 className="text-2xl font-semibold text-gray-800">{order.productName}</h3>
-//               <p className="text-sm text-gray-600 mt-1">Order Date: {order.orderDate}</p>
-//               <p className="text-lg font-bold text-gray-900 mt-4">{order.amount}</p>
-//               <div
-//                 className={`mt-4 inline-block px-3 py-1 rounded-full text-sm font-semibold ${
-//                   order.status === 'Shipped'
-//                     ? 'bg-yellow-100 text-yellow-600'
-//                     : order.status === 'Delivered'
-//                     ? 'bg-green-100 text-green-600'
-//                     : 'bg-gray-100 text-gray-600'
-//                 }`}
-//               >
-//                 {order.status}
-//               </div>
-//             </div>
-//           </div>
-//         ))}
-//       </div>
-//     </div>
-//   );
-// };
-
-// export default OrderHistoryPage;
-
 
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
@@ -75,7 +11,7 @@ const OrderHistoryPage = () => {
   useEffect(() => {
     const fetchOrders = async () => {
       try {
-        const response = await axios.get('http://localhost:3000/api/user/get-bookings');
+        const response = await axios.get('http://localhost:3000/api/user/get/bookings');
         setOrders(response.data); 
       } catch (err) {
         setError('Failed to fetch orders');
@@ -113,7 +49,7 @@ const OrderHistoryPage = () => {
                     {order.selectedItems[mealType].map((item, index) => (
                       <div key={index} className="flex justify-between mt-2">
                         <p>{item.name} ({item.details.size})</p>
-                        <p>{item.details.quantity} x ${item.details.price}</p>
+                        <p>{item.details.quantity} x ₹{item.details.price}</p>
                       </div>
                     ))}
                   </div>
@@ -121,17 +57,17 @@ const OrderHistoryPage = () => {
               </div>
 
           
-              <p className="text-lg font-bold text-gray-900 mt-4">Total: ${order.totalAmount}</p>
+              {/* <p className="text-lg font-bold text-gray-900 mt-4">Total: ₹ {order.totalAmount}</p> */}
 
            
               {order.discount > 0 && (
-                <p className="text-sm text-gray-600 mt-2">Discount: ${order.discount}</p>
+                <p className="text-sm text-gray-600 mt-2">Discount: ₹{order.discount}</p>
               )}
-              {order.walletBalanceUsed > 0 && (
-                <p className="text-sm text-gray-600 mt-2">Wallet Balance Used: ${order.walletBalanceUsed}</p>
-              )}
+              {/* {order.walletBalanceUsed > 0 && (
+                <p className="text-sm text-gray-600 mt-2">Wallet Balance Used: ₹{order.walletBalanceUsed}</p>
+              )} */}
 
-             
+{/*              
               <div
                 className={`mt-4 inline-block px-3 py-1 rounded-full text-sm font-semibold ${
                   order.paymentStatus === 'Pending'
@@ -142,7 +78,7 @@ const OrderHistoryPage = () => {
                 }`}
               >
                 {order.paymentStatus}
-              </div>
+              </div> */}
             </div>
           </div>
         ))}

@@ -120,7 +120,7 @@ const Navbar = () => {
                   </Link>
                 </li>
                 <li>
-                  <Link to="/signup" className="block text-xl" onClick={closeMenu}>
+                  <Link to="/register" className="block text-xl" onClick={closeMenu}>
                     Signup
                   </Link>
                 </li>

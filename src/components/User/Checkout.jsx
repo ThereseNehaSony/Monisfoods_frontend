@@ -138,7 +138,8 @@ const calculateTotal = () => {
       // userPhone: '1234567890',
       userId:user,
       meals: formattedItems,
-      totalAmount: calculateTotal(),
+       totalAmount: calculateTotal(),
+     
       discount,
       walletBalanceUsed: isWalletUsed ? walletBalance : 0,
       paymentDetails, 
