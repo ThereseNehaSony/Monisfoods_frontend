@@ -1,8 +1,7 @@
 /* eslint-disable no-unused-vars */
 import { createSlice } from '@reduxjs/toolkit';
 import axios from 'axios';
-
-import { baseURL } from '../../common/api';
+import { baseURL } from '../../../common/api';
 
 const api = axios.create({
   baseURL: baseURL,
