@@ -1,3 +1,4 @@
 {
-    "rewrites": [{ "source": "/(.*)", "destination": "https://showbuzzz.vercel.app" }]
+    "rewrites": [{ "source": "/(.*)", "destination": "https://monis-food.vercel.app" }]
   }
+ 

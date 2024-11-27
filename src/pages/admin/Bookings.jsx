@@ -11,7 +11,7 @@ import Sidebar from '../../components/Admin/Sidebar';
     useEffect(() => {
       const fetchBookings = async () => {
         try {
-          const response = await axios.get('http://monis-foods-backend.vercel.app/api/admin/bookings');
+          const response = await axios.get('https://monis-foods-backend.vercel.app/api/admin/bookings');
           setCategorizedBookings(response.data.categorizedBookings);
         } catch (error) {
           setError('Failed to load bookings');

@@ -41,7 +41,7 @@ const AddAvailableItem = () => {
       toast.error('Name and Description are required!');
       return;
     }
-    axios.post('http://monis-foods-backend.vercel.app/api/admin/menu-item', newItem)
+    axios.post('https://monis-foods-backend.vercel.app/api/admin/menu-item', newItem)
       .then(() => {
         toast.success('Item added successfully!');
         setNewItem({

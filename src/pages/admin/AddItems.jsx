@@ -88,7 +88,7 @@ function AddItems() {
   
  
   useEffect(() => {
-    axios.get('http://monis-foods-backend.vercel.app/api/admin/menu-items')
+    axios.get('https://monis-foods-backend.vercel.app/api/admin/menu-items')
       .then((response) => {
         setAvailableItems(response.data);
       })
@@ -113,8 +113,8 @@ function AddItems() {
     }
   
     const apiUrl = editingItem
-      ? `http://monis-foods-backend.vercel.app/api/admin/menu-item/${editingItem._id}`
-      : 'http://monis-foods-backend.vercel.app/api/admin/menu-item';
+      ? `https://monis-foods-backend.vercel.app/api/admin/menu-item/${editingItem._id}`
+      : 'https://monis-foods-backend.vercel.app/api/admin/menu-item';
   
     const method = editingItem ? axios.put : axios.post;
   
@@ -145,7 +145,7 @@ function AddItems() {
   };
   
   const handleDeleteItem = (id) => {
-    axios.delete(`http://monis-foods-backend.vercel.app/api/admin/menu-item/${id}`)
+    axios.delete(`https://monis-foods-backend.vercel.app/api/admin/menu-item/${id}`)
       .then(() => {
         setAvailableItems((prev) => prev.filter(item => item._id !== id));
         toast.success('Item deleted successfully');

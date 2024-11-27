@@ -15,7 +15,7 @@ const WalletPage = () => {
  
     const fetchWalletData = async () => {
       try {
-        const response = await axios.get( `http://monis-foods-backend.vercel.app/api/user/wallet/data?userId=${user}`);
+        const response = await axios.get( `https://monis-foods-backend.vercel.app/api/user/wallet/data?userId=${user}`);
         setBalance(response.data.balance); 
         setTransactions(response.data.transactions); 
       } catch (error) {

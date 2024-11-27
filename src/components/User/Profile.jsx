@@ -17,7 +17,7 @@ const Profile = () => {
 
     const fetchUserDetails = async () => {
       try {
-        const response = await axios.get(`http://monis-foods-backend.vercel.app/api/user/${userId}`);
+        const response = await axios.get(`https://monis-foods-backend.vercel.app/api/user/${userId}`);
         const { mobileNumber, name, email, address } = response.data;
         setFormData({ mobileNumber, name, email, address });
         setIsLoading(false);
@@ -43,7 +43,7 @@ const Profile = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.put(`http://monis-foods-backend.vercel.app/api/user/${userId}`, formData);
+      const response = await axios.put(`https://monis-foods-backend.vercel.app/api/user/${userId}`, formData);
       console.log('Personal details updated:', response.data);
       setIsSubmitted(true);
 

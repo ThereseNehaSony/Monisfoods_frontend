@@ -47,7 +47,7 @@ const calculateTotal = () => {
   const total = calculateTotal();
   const handleApplyCoupon = async () => {
     try {
-      const response = await axios.post("http://monis-foods-backend.vercel.app/api/admin/coupons/validate", {
+      const response = await axios.post("https://monis-foods-backend.vercel.app/api/admin/coupons/validate", {
         code: couponCode,
       });
    
@@ -70,7 +70,7 @@ const calculateTotal = () => {
   
   const handleShowCoupons = async () => {
     try {
-      const response = await axios.get("http://monis-foods-backend.vercel.app/api/admin/coupons");
+      const response = await axios.get("https://monis-foods-backend.vercel.app/api/admin/coupons");
       setAvailableCoupons(response.data);
     } catch (error) {
       console.error("Error fetching coupons:", error);
@@ -81,7 +81,7 @@ const calculateTotal = () => {
   useEffect(() => {
     const fetchWalletBalance = async () => {
       try {
-        const response = await axios.get(`http://monis-foods-backend.vercel.app/api/user/wallet/balance?userId=${user}`); 
+        const response = await axios.get(`https://monis-foods-backend.vercel.app/api/user/wallet/balance?userId=${user}`); 
         if (response.status === 200) {
           setWalletBalance(response.data.balance); 
         }
@@ -146,7 +146,7 @@ const calculateTotal = () => {
     };
   
     try {
-      const response = await axios.post('http://monis-foods-backend.vercel.app/api/user/bookings', bookingData);
+      const response = await axios.post('https://monis-foods-backend.vercel.app/api/user/bookings', bookingData);
       toast.success('Booking Successful');
       navigate('/payment-success');
       console.log('Booking Response:', response.data);
@@ -161,7 +161,7 @@ const calculateTotal = () => {
   console.log(totalAmount);
   
       
-      const response = await axios.post('http://monis-foods-backend.vercel.app/api/user/create-order', {
+      const response = await axios.post('https://monis-foods-backend.vercel.app/api/user/create-order', {
         amount: totalAmount
       });
   

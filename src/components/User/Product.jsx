@@ -47,7 +47,7 @@ const FoodMenu = () => {
     const formattedDate = today.toISOString().split("T")[0];
 
     axios
-      .get(`http://monis-foods-backend.vercel.app/api/user/menu/${formattedDate}`)
+      .get(`https://monis-foods-backend.vercel.app/api/user/menu/${formattedDate}`)
       .then((response) => {
         setMenuData(response.data);
       })

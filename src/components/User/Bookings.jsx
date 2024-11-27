@@ -11,7 +11,7 @@ const OrderHistoryPage = () => {
   useEffect(() => {
     const fetchOrders = async () => {
       try {
-        const response = await axios.get('http://monis-foods-backend.vercel.app/api/user/get/bookings');
+        const response = await axios.get('https://monis-foods-backend.vercel.app/api/user/get/bookings');
         setOrders(response.data); 
       } catch (err) {
         setError('Failed to fetch orders');

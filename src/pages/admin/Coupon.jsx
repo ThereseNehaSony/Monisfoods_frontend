@@ -15,7 +15,7 @@ const CouponManagement = () => {
   useEffect(() => {
     const fetchCoupons = async () => {
       try {
-        const response = await axios("http://monis-foods-backend.vercel.app/api/admin/coupons"); 
+        const response = await axios("https://monis-foods-backend.vercel.app/api/admin/coupons"); 
         const data = await response.data;
         setCoupons(data);
       } catch (error) {
@@ -35,7 +35,7 @@ const CouponManagement = () => {
   const handleAddCoupon = async () => {
     try {
       const response = await axios.post(
-        "http://monis-foods-backend.vercel.app/api/admin/coupons",
+        "https://monis-foods-backend.vercel.app/api/admin/coupons",
         newCoupon, 
         {
           headers: {
