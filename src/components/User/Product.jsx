@@ -49,7 +49,7 @@ const FoodMenu = () => {
     const formattedDate = today.toISOString().split("T")[0];
 
     axios
-      .get(`${baseURL}api/user/menu/${formattedDate}`)
+      .get(`${baseURL}/api/user/menu/${formattedDate}`)
       .then((response) => {
         setMenuData(response.data);
       })
