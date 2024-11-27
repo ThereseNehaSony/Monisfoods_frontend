@@ -2,14 +2,15 @@
 import { createSlice } from '@reduxjs/toolkit';
 import axios from 'axios';
 
+
+
 const api = axios.create({
   baseURL: 'https://monis-foods-backend.vercel.app',
-  withCredentials: true,
+  // Remove withCredentials: true
   headers: {
     'Content-Type': 'application/json',
-  }
+}
 });
-
 // Add axios interceptor to include token in headers
 api.interceptors.request.use(
   (config) => {
