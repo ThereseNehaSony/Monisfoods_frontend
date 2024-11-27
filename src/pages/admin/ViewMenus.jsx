@@ -14,12 +14,12 @@ const ViewMenus = () => {
     endDate: new Date(new Date().setDate(new Date().getDate() + 6)).toISOString().split('T')[0]
   });
 
-
+ 
 
   const fetchDailyMenu = async (date) => {
     try {
       setLoading(true);
-      const response = await fetch(`${baseURL}/daily-menu/${date}`, {
+      const response = await fetch(`${baseURL}/api/admin/daily-menu/${date}`, {
         headers: {
           'Accept': 'application/json',
           'Content-Type': 'application/json',
@@ -51,7 +51,7 @@ const ViewMenus = () => {
     try {
       setLoading(true);
       const response = await fetch(
-        `${baseURL}/weekly-menu?startDate=${startDate}&endDate=${endDate}`,
+        `${baseURL}/api/admin/weekly-menu?startDate=${startDate}&endDate=${endDate}`,
         {
           headers: {
             'Accept': 'application/json',
