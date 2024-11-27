@@ -1,7 +1,7 @@
 import axios from "axios";
 import React, { useState, useEffect } from "react";
 import Sidebar from "../../components/Admin/Sidebar";
-
+const baseURL = import.meta.env.VITE_API_BASE_URL;
 const CouponManagement = () => {
   const [coupons, setCoupons] = useState([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -15,7 +15,7 @@ const CouponManagement = () => {
   useEffect(() => {
     const fetchCoupons = async () => {
       try {
-        const response = await axios("https://monis-foods-backend.vercel.app/api/admin/coupons"); 
+        const response = await axios(`${baseURL}/api/admin/coupons`); 
         const data = await response.data;
         setCoupons(data);
       } catch (error) {
@@ -35,7 +35,7 @@ const CouponManagement = () => {
   const handleAddCoupon = async () => {
     try {
       const response = await axios.post(
-        "https://monis-foods-backend.vercel.app/api/admin/coupons",
+        `${baseURL}/api/admin/coupons`,
         newCoupon, 
         {
           headers: {

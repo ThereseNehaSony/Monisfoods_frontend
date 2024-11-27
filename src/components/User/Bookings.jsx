@@ -2,6 +2,8 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 
+const baseURL = import.meta.env.VITE_API_BASE_URL;
+
 const OrderHistoryPage = () => {
   const [orders, setOrders] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -11,7 +13,7 @@ const OrderHistoryPage = () => {
   useEffect(() => {
     const fetchOrders = async () => {
       try {
-        const response = await axios.get('https://monis-foods-backend.vercel.app/api/user/get/bookings');
+        const response = await axios.get(`${baseURL}/api/user/get/bookings`);
         setOrders(response.data); 
       } catch (err) {
         setError('Failed to fetch orders');

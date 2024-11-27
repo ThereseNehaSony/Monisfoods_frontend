@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import Sidebar from '../../components/Admin/Sidebar';
- // Adjust the path to your Sidebar component
+const baseURL = import.meta.env.VITE_API_BASE_URL;
 
  const AdminBookingsCategorized = () => {
     const [categorizedBookings, setCategorizedBookings] = useState([]);
@@ -11,7 +11,7 @@ import Sidebar from '../../components/Admin/Sidebar';
     useEffect(() => {
       const fetchBookings = async () => {
         try {
-          const response = await axios.get('https://monis-foods-backend.vercel.app/api/admin/bookings');
+          const response = await axios.get(`${baseURL}/api/admin/bookings`);
           setCategorizedBookings(response.data.categorizedBookings);
         } catch (error) {
           setError('Failed to load bookings');

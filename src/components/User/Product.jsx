@@ -4,6 +4,7 @@ import axios from "axios";
 import { useNavigate } from "react-router";
 import { useDispatch, useSelector } from "react-redux";
 
+const baseURL = import.meta.env.VITE_API_BASE_URL;
 const ConfirmationModal = ({ isOpen, onClose, onConfirm, message }) => {
   if (!isOpen) return null;
 
@@ -47,7 +48,7 @@ const FoodMenu = () => {
     const formattedDate = today.toISOString().split("T")[0];
 
     axios
-      .get(`https://monis-foods-backend.vercel.app/api/user/menu/${formattedDate}`)
+      .get(`${baseURL}api/user/menu/${formattedDate}`)
       .then((response) => {
         setMenuData(response.data);
       })

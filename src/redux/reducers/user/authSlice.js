@@ -2,10 +2,10 @@
 import { createSlice } from '@reduxjs/toolkit';
 import axios from 'axios';
 
-
+const baseURL = import.meta.env.VITE_API_BASE_URL;
 
 const api = axios.create({
-  baseURL: 'https://monis-foods-backend.vercel.app',
+  baseURL: baseURL,
   // Remove withCredentials: true
   headers: {
     'Content-Type': 'application/json',

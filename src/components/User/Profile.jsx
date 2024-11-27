@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import axios from 'axios';
-
+const baseURL = import.meta.env.VITE_API_BASE_URL;
 const Profile = () => {
   const userId = useSelector((state) => state.auth.user); 
   const [formData, setFormData] = useState({
@@ -17,7 +17,7 @@ const Profile = () => {
 
     const fetchUserDetails = async () => {
       try {
-        const response = await axios.get(`https://monis-foods-backend.vercel.app/api/user/${userId}`);
+        const response = await axios.get(`${baseURL}/api/user/${userId}`);
         const { mobileNumber, name, email, address } = response.data;
         setFormData({ mobileNumber, name, email, address });
         setIsLoading(false);
@@ -43,7 +43,7 @@ const Profile = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.put(`https://monis-foods-backend.vercel.app/api/user/${userId}`, formData);
+      const response = await axios.put(`${baseURL}/api/user/${userId}`, formData);
       console.log('Personal details updated:', response.data);
       setIsSubmitted(true);
 

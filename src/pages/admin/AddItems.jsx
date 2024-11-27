@@ -7,7 +7,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import { FaEdit, FaTrash } from 'react-icons/fa';
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
-
+const baseURL = import.meta.env.VITE_API_BASE_URL;
 
 
 function AddItems() {
@@ -22,7 +22,7 @@ function AddItems() {
 
   const onSubmit = async (values, { resetForm }) => {
     try {
-      await axios.post("http://localhost:3000/api/admin/schools", values);
+      await axios.post(`${baseURL}/api/admin/schools`, values);
       toast.success("School added successfully!");
       resetForm();
     } catch (error) {
@@ -59,7 +59,7 @@ function AddItems() {
 
 
    
-      const response = await axios.get("http://monis-foods-backend.vercel.app/api/admin/schools");
+      const response = await axios.get(`${baseURL}/api/admin/schools`);
       setSchools(response.data.schools);
    
    
@@ -88,7 +88,7 @@ function AddItems() {
   
  
   useEffect(() => {
-    axios.get('https://monis-foods-backend.vercel.app/api/admin/menu-items')
+    axios.get(`${baseURL}/api/admin/menu-items`)
       .then((response) => {
         setAvailableItems(response.data);
       })
@@ -113,8 +113,8 @@ function AddItems() {
     }
   
     const apiUrl = editingItem
-      ? `https://monis-foods-backend.vercel.app/api/admin/menu-item/${editingItem._id}`
-      : 'https://monis-foods-backend.vercel.app/api/admin/menu-item';
+      ? `${baseURL}/api/admin/menu-item/${editingItem._id}`
+      : `${baseURL}/api/admin/menu-item`;
   
     const method = editingItem ? axios.put : axios.post;
   
@@ -145,7 +145,7 @@ function AddItems() {
   };
   
   const handleDeleteItem = (id) => {
-    axios.delete(`https://monis-foods-backend.vercel.app/api/admin/menu-item/${id}`)
+    axios.delete(`${baseURL}/api/admin/menu-item/${id}`)
       .then(() => {
         setAvailableItems((prev) => prev.filter(item => item._id !== id));
         toast.success('Item deleted successfully');

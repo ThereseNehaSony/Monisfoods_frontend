@@ -5,6 +5,8 @@ import { selectSelectedItems } from '../../redux/reducers/user/selectedItemsSlic
 import { toast, ToastContainer } from 'react-toastify';
 import { useNavigate } from 'react-router-dom';
 
+const baseURL = import.meta.env.VITE_API_BASE_URL;
+
 const Checkout = () => {
     const navigate = useNavigate();  
   const selectedItems = useSelector(selectSelectedItems);
@@ -47,7 +49,7 @@ const calculateTotal = () => {
   const total = calculateTotal();
   const handleApplyCoupon = async () => {
     try {
-      const response = await axios.post("https://monis-foods-backend.vercel.app/api/admin/coupons/validate", {
+      const response = await axios.post(`${baseURL}/api/admin/coupons/validate`, {
         code: couponCode,
       });
    
@@ -70,7 +72,7 @@ const calculateTotal = () => {
   
   const handleShowCoupons = async () => {
     try {
-      const response = await axios.get("https://monis-foods-backend.vercel.app/api/admin/coupons");
+      const response = await axios.get(`${baseURL}/api/admin/coupons`);
       setAvailableCoupons(response.data);
     } catch (error) {
       console.error("Error fetching coupons:", error);
@@ -81,7 +83,7 @@ const calculateTotal = () => {
   useEffect(() => {
     const fetchWalletBalance = async () => {
       try {
-        const response = await axios.get(`https://monis-foods-backend.vercel.app/api/user/wallet/balance?userId=${user}`); 
+        const response = await axios.get(`${baseURL}/api/user/wallet/balance?userId=${user}`); 
         if (response.status === 200) {
           setWalletBalance(response.data.balance); 
         }
@@ -146,7 +148,7 @@ const calculateTotal = () => {
     };
   
     try {
-      const response = await axios.post('https://monis-foods-backend.vercel.app/api/user/bookings', bookingData);
+      const response = await axios.post(`${baseURL}/api/user/bookings`, bookingData);
       toast.success('Booking Successful');
       navigate('/payment-success');
       console.log('Booking Response:', response.data);
@@ -161,7 +163,7 @@ const calculateTotal = () => {
   console.log(totalAmount);
   
       
-      const response = await axios.post('https://monis-foods-backend.vercel.app/api/user/create-order', {
+      const response = await axios.post(`${baseURL}/api/user/create-order`, {
         amount: totalAmount
       });
   

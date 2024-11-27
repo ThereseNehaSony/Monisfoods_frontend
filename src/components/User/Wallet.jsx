@@ -2,7 +2,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios'; 
 import { useSelector } from 'react-redux';
-
+const baseURL = import.meta.env.VITE_API_BASE_URL;
 const WalletPage = () => {
  
   const [balance, setBalance] = useState(0.00);
@@ -15,7 +15,7 @@ const WalletPage = () => {
  
     const fetchWalletData = async () => {
       try {
-        const response = await axios.get( `https://monis-foods-backend.vercel.app/api/user/wallet/data?userId=${user}`);
+        const response = await axios.get( `${baseURL}/api/user/wallet/data?userId=${user}`);
         setBalance(response.data.balance); 
         setTransactions(response.data.transactions); 
       } catch (error) {

@@ -2,6 +2,9 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 
+const baseURL = import.meta.env.VITE_API_BASE_URL;
+
+
 const ParentHomePage = () => {
   const [students, setStudents] = useState([]); 
   const [isAddStudentModalOpen, setIsAddStudentModalOpen] = useState(false);
@@ -18,7 +21,7 @@ const ParentHomePage = () => {
   useEffect(() => {
     const fetchStudents = async () => {
       try {
-        const response = await axios.get('https://monis-foods-backend.vercel.app/api/user/students');
+        const response = await axios.get(`${baseURL}/api/user/students`);
         setStudents(response.data);
       } catch (error) {
         console.error("Error fetching students:", error);
@@ -31,7 +34,7 @@ const ParentHomePage = () => {
   useEffect(() => {
     const fetchSchools = async () => {
       try {
-        const response = await axios.get("https://monis-foods-backend.vercel.app/api/admin/schools"); 
+        const response = await axios.get(`${baseURL}/api/admin/schools`); 
         
         setSchools(response.data.schools);
       } catch (error) {
@@ -50,7 +53,7 @@ const ParentHomePage = () => {
   
   const handleAddStudent = async () => {
     try {
-      const response = await axios.post('https://monis-foods-backend.vercel.app/api/user/students', newStudent);
+      const response = await axios.post(`${baseURL}/api/user/students`, newStudent);
       setStudents((prevStudents) => [...prevStudents, response.data]);
       setNewStudent({ name: '', class: '', school: '' });
       setIsAddStudentModalOpen(false);
