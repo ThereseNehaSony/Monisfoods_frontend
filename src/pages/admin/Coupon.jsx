@@ -1,7 +1,8 @@
 import axios from "axios";
 import React, { useState, useEffect } from "react";
 import Sidebar from "../../components/Admin/Sidebar";
-const baseURL = import.meta.env.VITE_API_BASE_URL;
+import { baseURL } from '../../common/api';
+
 const CouponManagement = () => {
   const [coupons, setCoupons] = useState([]);
   const [isModalOpen, setIsModalOpen] = useState(false);

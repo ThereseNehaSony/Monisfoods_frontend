@@ -4,7 +4,8 @@ import axios from "axios";
 import { useNavigate } from "react-router";
 import { useDispatch, useSelector } from "react-redux";
 
-const baseURL = import.meta.env.VITE_API_BASE_URL;
+import { baseURL } from '../../common/api';
+
 const ConfirmationModal = ({ isOpen, onClose, onConfirm, message }) => {
   if (!isOpen) return null;
 

@@ -3,7 +3,7 @@ import axios from 'axios';
 import Sidebar from '../../components/Admin/Sidebar';
 import { MdDelete } from "react-icons/md";
 import { FaPencilAlt } from "react-icons/fa";
-const baseURL = import.meta.env.VITE_API_BASE_URL;
+import { baseURL } from '../../common/api';
 
 const UsersPage = () => {
   const [students, setStudents] = useState([]);

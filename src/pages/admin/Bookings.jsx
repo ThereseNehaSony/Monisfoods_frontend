@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import Sidebar from '../../components/Admin/Sidebar';
-const baseURL = import.meta.env.VITE_API_BASE_URL;
+import { baseURL } from '../../common/api';
 
  const AdminBookingsCategorized = () => {
     const [categorizedBookings, setCategorizedBookings] = useState([]);

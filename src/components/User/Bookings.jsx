@@ -1,8 +1,7 @@
 
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-
-const baseURL = import.meta.env.VITE_API_BASE_URL;
+import { baseURL } from '../../common/api';
 
 const OrderHistoryPage = () => {
   const [orders, setOrders] = useState([]);

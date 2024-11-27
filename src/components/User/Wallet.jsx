@@ -2,7 +2,8 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios'; 
 import { useSelector } from 'react-redux';
-const baseURL = import.meta.env.VITE_API_BASE_URL;
+import { baseURL } from '../../common/api';
+
 const WalletPage = () => {
  
   const [balance, setBalance] = useState(0.00);

@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { FaCalendar, FaCalendarWeek } from 'react-icons/fa';
 import { ToastContainer, toast } from 'react-toastify';
 import Sidebar from '../../components/Admin/Sidebar';
+import { baseURL } from '../../common/api';
 
 const ViewMenus = () => {
   const [viewType, setViewType] = useState('daily');
@@ -13,12 +14,12 @@ const ViewMenus = () => {
     endDate: new Date(new Date().setDate(new Date().getDate() + 6)).toISOString().split('T')[0]
   });
 
-  const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
+
 
   const fetchDailyMenu = async (date) => {
     try {
       setLoading(true);
-      const response = await fetch(`${API_BASE_URL}/daily-menu/${date}`, {
+      const response = await fetch(`${baseURL}/daily-menu/${date}`, {
         headers: {
           'Accept': 'application/json',
           'Content-Type': 'application/json',
@@ -50,7 +51,7 @@ const ViewMenus = () => {
     try {
       setLoading(true);
       const response = await fetch(
-        `${API_BASE_URL}/weekly-menu?startDate=${startDate}&endDate=${endDate}`,
+        `${baseURL}/weekly-menu?startDate=${startDate}&endDate=${endDate}`,
         {
           headers: {
             'Accept': 'application/json',

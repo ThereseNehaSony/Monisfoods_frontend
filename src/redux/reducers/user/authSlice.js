@@ -2,7 +2,7 @@
 import { createSlice } from '@reduxjs/toolkit';
 import axios from 'axios';
 
-const baseURL = import.meta.env.VITE_API_BASE_URL;
+import { baseURL } from '../../common/api';
 
 const api = axios.create({
   baseURL: baseURL,

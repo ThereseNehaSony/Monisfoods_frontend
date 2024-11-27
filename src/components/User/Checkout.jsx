@@ -4,8 +4,7 @@ import { useSelector } from 'react-redux';
 import { selectSelectedItems } from '../../redux/reducers/user/selectedItemsSlice';
 import { toast, ToastContainer } from 'react-toastify';
 import { useNavigate } from 'react-router-dom';
-
-const baseURL = import.meta.env.VITE_API_BASE_URL;
+import { baseURL } from '../../common/api';
 
 const Checkout = () => {
     const navigate = useNavigate();  

@@ -7,7 +7,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import { FaEdit, FaTrash } from 'react-icons/fa';
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
-const baseURL = import.meta.env.VITE_API_BASE_URL;
+import { baseURL } from '../../common/api';
 
 
 function AddItems() {

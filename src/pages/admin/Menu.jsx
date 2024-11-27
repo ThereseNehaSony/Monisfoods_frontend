@@ -5,7 +5,7 @@ import Sidebar from '../../components/Admin/Sidebar';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { FaEdit, FaTrash } from 'react-icons/fa';
-const baseURL = import.meta.env.VITE_API_BASE_URL;
+import { baseURL } from '../../common/api';
 
 const AddMenu = () => {
   const [menuType, setMenuType] = useState('daily');
