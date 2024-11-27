@@ -2,6 +2,29 @@
 import { createSlice } from '@reduxjs/toolkit';
 import axios from 'axios';
 
+const api = axios.create({
+  baseURL: 'https://monis-foods-backend.vercel.app',
+  withCredentials: true,
+  headers: {
+    'Content-Type': 'application/json',
+  }
+});
+
+// Add axios interceptor to include token in headers
+api.interceptors.request.use(
+  (config) => {
+    const token = localStorage.getItem('token');
+    if (token) {
+      config.headers.Authorization =`Bearer ${token}`;
+    }
+    return config;
+  },
+  (error) => {
+    return Promise.reject(error);
+  }
+);
+
+
 const initialState = {
   isAuthenticated: localStorage.getItem('token') ? true : false,
   user: localStorage.getItem('user') ? JSON.parse(localStorage.getItem('user')) : null,
@@ -52,18 +75,18 @@ const authSlice = createSlice({
 export const { loginRequest, loginSuccess, loginFailure, logout } = authSlice.actions;
 
 // Add axios interceptor to include token in headers
-axios.interceptors.request.use(
-  (config) => {
-    const token = localStorage.getItem('token');
-    if (token) {
-      config.headers.Authorization = `Bearer ${token}`;
-    }
-    return config;
-  },
-  (error) => {
-    return Promise.reject(error);
-  }
-);
+// axios.interceptors.request.use(
+//   (config) => {
+//     const token = localStorage.getItem('token');
+//     if (token) {
+//       config.headers.Authorization = `Bearer ${token}`;
+//     }
+//     return config;
+//   },
+//   (error) => {
+//     return Promise.reject(error);
+//   }
+// );
 
 // Create a function to verify token
 export const verifyToken = () => async (dispatch) => {
@@ -72,36 +95,40 @@ export const verifyToken = () => async (dispatch) => {
     dispatch(logout());
     return;
   }
-
+  
   try {
-    const response = await axios.get('https://monis-foods-backend.vercel.app/api/auth/verify-token');
+    const response = await api.get('/api/auth/verify-token');
     dispatch(loginSuccess({
       token,
       user: response.data.user,
       role: response.data.role
     }));
   } catch (error) {
+    console.error('Token verification failed:', error);
     dispatch(logout());
   }
 };
 
 export const loginUser = ({ mobileNumber, password }) => async (dispatch) => {
   dispatch(loginRequest());
-
+  
   try {
-    const response = await axios.post('https://monis-foods-backend.vercel.app/api/auth/login/password', 
-      { mobileNumber, password }
-    );
-
+    const response = await api.post('/api/auth/login/password', {
+      mobileNumber,
+      password
+    });
+    
     dispatch(loginSuccess({ 
       token: response.data.token, 
       user: response.data.userId, 
       role: response.data.role  
     }));
   } catch (error) {
+    console.error('Login failed:', error);
     const errorMessage = error.response?.data?.message || 'An unexpected error occurred';
     dispatch(loginFailure({ error: errorMessage }));
   }
 };
+
 
 export default authSlice.reducer;
