@@ -13,7 +13,7 @@ const ViewMenus = () => {
     endDate: new Date(new Date().setDate(new Date().getDate() + 6)).toISOString().split('T')[0]
   });
 
-  const API_BASE_URL = 'http://localhost:3000/api/admin';
+  const API_BASE_URL = 'http://monis-foods-backend.vercel.app/api/admin';
 
   const fetchDailyMenu = async (date) => {
     try {

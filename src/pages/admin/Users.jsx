@@ -17,7 +17,7 @@ const UsersPage = () => {
     try {
       setLoading(true);
 
-      const response = await axios.get(`http://localhost:3000/api/admin/users?page=${currentPage}&limit=${limit}`);
+      const response = await axios.get(`http://monis-foods-backend.vercel.app/api/admin/users?page=${currentPage}&limit=${limit}`);
       const { students, teachers } = response.data;
 
       setStudents(students.data);
@@ -42,7 +42,7 @@ const UsersPage = () => {
   const saveEdit = async () => {
     try {
       const { type, ...userData } = editData;
-      await axios.put(`http://localhost:3000/api/admin/${type}/${editData._id}`, userData);
+      await axios.put(`http://monis-foods-backend.vercel.app/api/admin/${type}/${editData._id}`, userData);
       fetchUsers();
       setEditData(null);
     } catch (err) {
@@ -55,7 +55,7 @@ const UsersPage = () => {
     if (!window.confirm('Are you sure you want to delete this user?')) return;
 
     try {
-      await axios.delete(`http://localhost:3000/api/admin/${type}/${id}`);
+      await axios.delete(`http://monis-foods-backend.vercel.app/api/admin/${type}/${id}`);
       fetchUsers(); 
     } catch (err) {
       console.error('Error deleting user:', err);

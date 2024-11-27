@@ -220,7 +220,7 @@ import { useDispatch, useSelector } from "react-redux";
 import ViewMenus from "./pages/admin/ViewMenus";
 import { useEffect } from "react";
 import { verifyToken } from "./redux/reducers/user/authSlice";
-
+import AdminBookings from "./pages/admin/Bookings";
 
 
 const ProtectedRoute = ({ element: Element, allowedRoles, ...props }) => {
@@ -399,6 +399,15 @@ function AppContent() {
           element={
             <ProtectedRoute
               element={DashboardPage}
+              allowedRoles={['admin']}
+            />
+          }
+        />
+         <Route
+          path="/admin/bookings"
+          element={
+            <ProtectedRoute
+              element={AdminBookings}
               allowedRoles={['admin']}
             />
           }

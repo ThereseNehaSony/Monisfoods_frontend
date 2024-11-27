@@ -36,7 +36,7 @@ const AddMenu = () => {
 
   useEffect(() => {
     if (menuType === 'daily') {
-      axios.get(`http://localhost:3000/api/admin/daily-menu/${date}`)
+      axios.get(`http://monis-foods-backend.vercel.app/api/admin/daily-menu/${date}`)
         .then((response) => {
           if (response.data && response.data.meals) {
             setDailyMeals(response.data.meals);
@@ -100,7 +100,7 @@ const AddMenu = () => {
 
   const fetchWeeklyMenu = async (startDate, endDate) => {
     try {
-      const response = await axios.get(`http://localhost:3000/api/admin/weekly-menu`, {
+      const response = await axios.get(`http://monis-foods-backend.vercel.app/api/admin/weekly-menu`, {
         params: { startDate, endDate }
       });
       
@@ -185,7 +185,7 @@ const AddMenu = () => {
   }
 
   useEffect(() => {
-    axios.get('http://localhost:3000/api/admin/menu-items')
+    axios.get('http://monis-foods-backend.vercel.app/api/admin/menu-items')
       .then((response) => {
         console.log(response.data, "items")
         setAvailableItems(response.data);
@@ -268,7 +268,7 @@ const AddMenu = () => {
           snack: dailyMeals.snack.map(item => item._id)
         };
   
-        await axios.post('http://localhost:3000/api/admin/daily-menu', {
+        await axios.post('http://monis-foods-backend.vercel.app/api/admin/daily-menu', {
           date,
           meals: formattedMeals
         });
@@ -292,7 +292,7 @@ const AddMenu = () => {
           };
         });
   
-        await axios.post('http://localhost:3000/api/admin/weekly-menu', {
+        await axios.post('http://monis-foods-backend.vercel.app/api/admin/weekly-menu', {
           startDate: weekRange.startDate,
           endDate: weekRange.endDate,
           meals: formattedWeeklyMeals

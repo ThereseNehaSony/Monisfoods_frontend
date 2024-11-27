@@ -74,7 +74,7 @@ export const verifyToken = () => async (dispatch) => {
   }
 
   try {
-    const response = await axios.get('http://localhost:3000/api/auth/verify-token');
+    const response = await axios.get('http://monis-foods-backend.vercel.app/api/auth/verify-token');
     dispatch(loginSuccess({
       token,
       user: response.data.user,
@@ -89,7 +89,7 @@ export const loginUser = ({ mobileNumber, password }) => async (dispatch) => {
   dispatch(loginRequest());
 
   try {
-    const response = await axios.post('http://localhost:3000/api/auth/login/password', 
+    const response = await axios.post('http://monis-foods-backend.vercel.app/api/auth/login/password', 
       { mobileNumber, password }
     );
 
