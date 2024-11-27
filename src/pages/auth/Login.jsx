@@ -1,4 +1,3 @@
-/* eslint-disable no-unused-vars */
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { loginUser } from '../../redux/reducers/user/authSlice';
@@ -14,6 +13,7 @@ const Login = () => {
   const [mobileNumber, setMobileNumber] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
+  const [showCredentials, setShowCredentials] = useState(false);
 
   useEffect(() => {
     if (isAuthenticated) {
@@ -33,11 +33,42 @@ const Login = () => {
     }
   };
 
+  const TestCredentials = () => (
+    <div className="mt-8 p-4 bg-gray-50 rounded-lg border border-gray-200">
+      <div className="flex justify-between items-center mb-2">
+        <h3 className="text-sm font-semibold text-gray-700">Test Credentials</h3>
+        <button
+          onClick={() => setShowCredentials(!showCredentials)}
+          className="text-xs text-blue-500 hover:text-blue-700"
+        >
+          {showCredentials ? 'Hide' : 'Show'}
+        </button>
+      </div>
+      {showCredentials && (
+        <div className="space-y-4">
+          <div>
+            <h4 className="text-sm font-medium text-gray-600 mb-2">User Account</h4>
+            <div className="text-sm space-y-1">
+              <p className="text-gray-600">Mobile: <span className="font-mono">9539285746</span></p>
+              <p className="text-gray-600">Password: <span className="font-mono">1234</span></p>
+            </div>
+          </div>
+          <div>
+            <h4 className="text-sm font-medium text-gray-600 mb-2">Admin Account</h4>
+            <div className="text-sm space-y-1">
+              <p className="text-gray-600">Mobile: <span className="font-mono">9539285744</span></p>
+              <p className="text-gray-600">Password: <span className="font-mono">1234</span></p>
+            </div>
+          </div>
+        </div>
+      )}
+    </div>
+  );
+
   return (
     <div className="flex justify-center items-center min-h-screen bg-gray-50">
       <div className="w-full max-w-md p-6 space-y-6 bg-white rounded-lg shadow-lg">
         <h2 className="text-3xl font-bold text-center text-gray-800">Login</h2>
-
         <div className="space-y-4">
           <div className="relative">
             <input
@@ -64,18 +95,18 @@ const Login = () => {
           >
             Login with Password
           </button>
-          
           <div className="text-center pt-4">
             <p className="text-gray-600">
-              {`Don't have an account?`}{' '}
-              <Link 
-                to="/register" 
+              Don't have an account?{' '}
+              <Link
+                to="/register"
                 className="text-blue-500 hover:text-blue-700 font-medium transition-colors"
               >
                 Sign up here
               </Link>
             </p>
           </div>
+          <TestCredentials />
         </div>
       </div>
     </div>

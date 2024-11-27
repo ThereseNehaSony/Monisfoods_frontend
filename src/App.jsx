@@ -189,7 +189,6 @@
 
 // export default App;
 
-
 import { BrowserRouter, Routes, Route, useLocation, Navigate } from "react-router-dom";
 
 // General
@@ -217,8 +216,11 @@ import TermsAndConditions from "./pages/public/Terms";
 import RefundPolicy from "./pages/public/RefundPolicy";
 import PaymentSuccessPage from "./components/User/PaymentSuccess";
 import { Toaster } from "react-hot-toast";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import ViewMenus from "./pages/admin/ViewMenus";
+import { useEffect } from "react";
+import { verifyToken } from "./redux/reducers/user/authSlice";
+
 
 
 const ProtectedRoute = ({ element: Element, allowedRoles, ...props }) => {
@@ -236,6 +238,12 @@ const ProtectedRoute = ({ element: Element, allowedRoles, ...props }) => {
 };
 
 function App() {
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(verifyToken());
+  }, [dispatch]);
+
   return (
     <BrowserRouter>
       <AppContent />
@@ -448,4 +456,3 @@ function AppContent() {
 }
 
 export default App;
-
