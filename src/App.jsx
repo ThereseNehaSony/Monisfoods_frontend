@@ -221,6 +221,9 @@ import ViewMenus from "./pages/admin/ViewMenus";
 import { useEffect } from "react";
 import { verifyToken } from "./redux/reducers/user/authSlice";
 import AdminBookings from "./pages/admin/Bookings";
+import RevenueTracking from "./pages/admin/Revenue";
+import EditMenu from "./pages/admin/EditMenu";
+
 
 
 const ProtectedRoute = ({ element: Element, allowedRoles, ...props }) => {
@@ -430,6 +433,33 @@ function AppContent() {
             />
           }
         />
+         <Route
+          path="/admin/menus/add"
+          element={
+            <ProtectedRoute
+              element={AddMenu}
+              allowedRoles={['admin']}
+            />
+          }
+        />
+         <Route
+          path="/admin/menus/edit"
+          element={
+            <ProtectedRoute
+              element={EditMenu}
+              allowedRoles={['admin']}
+            />
+          }
+        />
+         <Route
+          path="/admin/menus/view"
+          element={
+            <ProtectedRoute
+              element={ViewMenus}
+              allowedRoles={['admin']}
+            />
+          }
+        />
         <Route
           path="/admin/items"
           element={
@@ -457,6 +487,16 @@ function AppContent() {
             />
           }
         />
+          <Route
+          path="/admin/revenue"
+          element={
+            <ProtectedRoute
+              element={RevenueTracking}
+              allowedRoles={['admin']}
+            />
+          }
+        />
+        
       </Routes>
 
       {!isAdminRoute && !isTeacherRoute && <Footer />}

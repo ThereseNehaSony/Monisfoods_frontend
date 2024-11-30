@@ -4,7 +4,7 @@ import BgImage from '../../assets/pic.jpg'
 import breakfast from '../../assets/breakfast.jpg'
 import lunch from '../../assets/lunchh.jpeg'
 import dinner from '../../assets/dinner.jpg'
-import logo from '../../assets/logo1.png'
+import logo from '../../assets/monis_logo1.png'
 
 function Home() {
   return (

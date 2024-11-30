@@ -52,6 +52,7 @@ const FoodMenu = () => {
       .get(`${baseURL}/api/user/menu/${formattedDate}`)
       .then((response) => {
         setMenuData(response.data);
+        console.log(response.data,"fff")
       })
       .catch((error) => console.error("Error fetching menu:", error));
   }, []);

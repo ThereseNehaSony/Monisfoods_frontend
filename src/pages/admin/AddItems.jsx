@@ -32,12 +32,6 @@ function AddItems() {
 
 
     const [date, setDate] = useState(new Date().toISOString().split('T')[0]);
-    //const [mealType, setMealType] = useState('breakfast');
-    // const [meals, setMeals] = useState({
-    //   breakfast: [],
-    //   lunch: [],
-    //   snack: []
-    // });
     const [availableItems, setAvailableItems] = useState([]);
     const [newItem, setNewItem] = useState({
       name: '',
@@ -49,7 +43,8 @@ function AddItems() {
     const [showAvailableItemsModal, setShowAvailableItemsModal] = useState(false);
     //const [showDailyMenuModal, setShowDailyMenuModal] = useState(false);
     const [editingItem, setEditingItem] = useState(null);
-
+    const [preview, setPreview] = useState(null);
+  const [imageUploaded, setImageUploaded] = useState(false); 
 
     const [schools, setSchools] = useState([]);
 
@@ -68,6 +63,7 @@ function AddItems() {
     const handleImageUpload = async (event) => {
         const file = event.target.files[0];
         if (!file) return;
+
       
         const formData = new FormData();
         formData.append('file', file);
@@ -81,8 +77,10 @@ function AddItems() {
           const data = await response.json();
           setNewItem((prev) => ({ ...prev, image: data.secure_url })); 
           console.log('Uploaded Image URL:', data.secure_url);
+          setImageUploaded(true);
         } catch (error) {
           console.error('Image upload failed:', error);
+          setImageUploaded(false)
         }
       };
   
@@ -136,6 +134,8 @@ function AddItems() {
           portions: { small: '', medium: '', large: '' },
           image: '',
         });
+        setPreview(null);
+        setImageUploaded(false); 
         setShowAddItemModal(false);
       })
       .catch((error) => {
@@ -161,13 +161,7 @@ function AddItems() {
     setNewItem(item);
     setShowAddItemModal(true);
   };
-  // const handleDeleteMenuItem = (mealType, id) => {
-  //   setMeals((prevMeals) => ({
-  //     ...prevMeals,
-  //     [mealType]: prevMeals[mealType].filter(item => item.id !== id)
-  //   }));
-  //   toast.success('Item removed from daily menu');
-  // };
+
   
     return (
         <div className="flex flex-col md:flex-row">
@@ -177,16 +171,7 @@ function AddItems() {
         <div className="flex-1 p-4 mt-8  md:p-6">
           <h2 className="text-2xl font-bold mt-4 mb-4 md:mb-6">Add Items</h2>
     
-          
-          {/* <div className="mb-4">
-            <label className="block mb-2">Select Date</label>
-            <input
-              type="date"
-              value={date}
-              onChange={(e) => setDate(e.target.value)}
-              className="p-2 border rounded w-full"
-            />
-          </div> */}
+        
           
         <div className="flex flex-col md:flex-row gap-2 mb-4">
           <button
@@ -273,14 +258,17 @@ function AddItems() {
         />
         {newItem.image && (
           <div className="mt-4">
-            <img src={newItem.image} alt="Uploaded menu item" className="w-full h-auto rounded-lg" />
+            <img src={newItem.image} alt="Uploaded menu item" className="w-32 h-32 rounded-lg" />
           </div>
         )}
       </div>
     
       <button
         onClick={handleAddOrEditItem}
-        className="bg-green-500 text-white py-2 px-4 rounded w-full"
+        className={`${
+          imageUploaded ? 'bg-green-500' : 'bg-gray-500'
+        } text-white py-2 px-4 rounded cursor-pointer`}
+        disabled={!imageUploaded}
       >
         {editingItem ? 'Update' : 'Add'} Item
       </button>
@@ -288,40 +276,7 @@ function AddItems() {
   </div>
 )}
 
- {/* Available Items Modal */}
- {/* {showAvailableItemsModal && (
-          <div className="fixed inset-0 bg-gray-800 bg-opacity-75 flex items-center justify-center z-50">
-            <div className="bg-white rounded-lg w-11/12 md:w-2/3 p-6 relative">
-              <button
-                onClick={() => setShowAvailableItemsModal(false)}
-                className="absolute top-2 right-2 bg-red-500 text-white p-2 rounded-full"
-              >
-                X
-              </button>
-              <h3 className="text-xl font-semibold mb-4">Available Menu Options</h3>
-              <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
-                {availableItems.map((item) => (
-                  <div
-                    key={item.id}
-                    className="border rounded-lg p-4 bg-gray-50 flex flex-col items-start md:flex-row md:justify-between"
-                  >
-                    <div>
-                      <p><strong>Name:</strong> {item.name}</p>
-                      <p><strong>Description:</strong> {item.description}</p>
-                      <p><strong>Price:</strong> ₹ {item.price}</p>
-                    </div>
-                    <div className="flex gap-2 mt-2 md:mt-0">
-                      <FaEdit onClick={() => handleEditItem(item)} className="cursor-pointer text-blue-500" />
-                      <FaTrash onClick={() => handleDeleteItem(item._id)} className="cursor-pointer text-red-500" />
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </div>
-        )} */}
 
-        {/* Available Items Table */}
         {showAvailableItemsModal && (
         <div className="overflow-x-auto">
           
@@ -404,9 +359,7 @@ function AddItems() {
       >
         Load Schools
       </button>
-{/* 
-      {loading && <p className="mt-4 text-gray-500">Loading...</p>}
-      {error && <p className="mt-4 text-red-500">{error}</p>} */}
+
       {schools.length > 0 && (
         <ul className="mt-4">
           {schools.map((school) => (
