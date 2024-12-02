@@ -236,6 +236,10 @@ const AdminBookingsCategorized = () => {
                     <strong>Booked At:</strong>{' '}
                     {new Date(booking.createdAt).toLocaleString()}
                   </div>
+                  {/* <div>
+                  <p>Student: {booking?.studentName}</p>
+                  <p>Meal Date: {new Date(booking?.mealDate).toLocaleDateString()}</p>
+               </div> */}
                 </div>
               ))}
             </div>

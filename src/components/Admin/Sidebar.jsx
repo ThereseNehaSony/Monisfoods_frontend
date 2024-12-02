@@ -1,8 +1,13 @@
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link ,useNavigate} from 'react-router-dom';
 import { FaBars, FaTimes, FaChevronDown } from 'react-icons/fa';
+import logo from '../../assets/monis_logo1.png'
+import { useDispatch } from 'react-redux';
+import { logout } from '../../redux/reducers/user/authSlice';
 
 const Sidebar = () => {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
   const [isOpen, setIsOpen] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false); // State for dropdown visibility
 
@@ -14,6 +19,12 @@ const Sidebar = () => {
     setIsMenuOpen(!isMenuOpen); // Toggle the dropdown menu
   };
 
+
+  const handleLogout = () => {
+    dispatch(logout());
+    navigate("/login");
+    setIsOpen(false); 
+  };
   return (
     <div>
       <div className="fixed top-4 left-4 z-20 md:hidden">
@@ -30,7 +41,16 @@ const Sidebar = () => {
       <aside
         className={`fixed top-0 left-0 h-full w-64 bg-[#320e0e] text-white z-20 transform transition-transform duration-300 ${isOpen ? 'translate-x-0' : '-translate-x-full'} md:relative md:translate-x-0 md:w-64`}
       >
-        <h2 className="text-2xl font-bold text-center py-4">Admin Panel</h2>
+        <div className="flex flex-col items-center py-4">
+    {/* Logo */}
+    <img
+      src={logo}
+      alt="Admin Panel Logo"
+      className="w-24 h-24 object-contain"
+    />
+    {/* Panel Title */}
+    <h2 className="text-2xl font-bold mt-2">Admin Panel</h2>
+  </div>
         <nav className="flex-grow overflow-y-auto"> {/* Allow scrolling if content overflows */}
           <ul className="space-y-2">
             <li>
@@ -94,7 +114,7 @@ const Sidebar = () => {
                       className="block px-4 py-2 hover:bg-gray-700"
                       onClick={() => setIsOpen(false)}
                     >
-                      Add Menus
+                      Add Menu
                     </Link>
                   </li>
                   <li>
@@ -103,13 +123,13 @@ const Sidebar = () => {
                       className="block px-4 py-2 hover:bg-gray-700"
                       onClick={() => setIsOpen(false)}
                     >
-                      edit Menu
+                      Edit Menu
                     </Link>
                   </li>
                 </ul>
               )}
             </li>
-            <li>
+            {/* <li>
               <Link
                 to="/admin/view-menus"
                 className="block px-4 py-2 hover:bg-gray-700"
@@ -117,7 +137,7 @@ const Sidebar = () => {
               >
                 View Menus
               </Link>
-            </li>
+            </li> */}
             <li>
               <Link
                 to="/admin/items"
@@ -144,6 +164,14 @@ const Sidebar = () => {
               >
                 Transactions
               </Link>
+            </li>
+            <li>
+              <button
+                className="block px-4 py-2 hover:bg-gray-700"
+                onClick={handleLogout}
+              >
+                Logout
+              </button>
             </li>
           </ul>
         </nav>

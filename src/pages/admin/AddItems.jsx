@@ -176,13 +176,13 @@ function AddItems() {
         <div className="flex flex-col md:flex-row gap-2 mb-4">
           <button
             onClick={() => setShowAddItemModal(true)}
-            className="bg-blue-500 text-white py-2 px-4 rounded"
+            className="bg-[#320e0e] text-white py-2 px-4 rounded"
           >
             Add Available Menu 
           </button>
           <button
             onClick={() => setShowAvailableItemsModal(true)}
-            className="bg-purple-500 text-white py-2 px-4 rounded"
+            className="bg-[#eb671c] text-white py-2 px-4 rounded"
           >
             View Available Menus
           </button>

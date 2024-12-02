@@ -3,7 +3,7 @@ import axios from 'axios';
 import { useSelector } from 'react-redux';
 import { selectSelectedItems } from '../../redux/reducers/user/selectedItemsSlice';
 import { toast, ToastContainer } from 'react-toastify';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate ,useLocation} from 'react-router-dom';
 import { baseURL } from '../../common/api';
 
 const Checkout = () => {
@@ -19,7 +19,10 @@ const Checkout = () => {
   const [isWalletUsed, setIsWalletUsed] = useState(false);
   const [isCouponApplied, setIsCouponApplied] = useState(false);
   const user = useSelector((state) => state.auth.user);
+  const location = useLocation();
 
+  const studentName = location.state?.studentName; 
+  
 
 const calculateTotal = () => {
     let total = 0;
@@ -107,7 +110,7 @@ const calculateTotal = () => {
   
     setIsWalletUsed(true); 
   };
-  console.log("Selected Items:", selectedItems);
+ 
 
   
   const handleBooking = async (paymentDetails) => {
@@ -134,13 +137,11 @@ const calculateTotal = () => {
     
   
     const bookingData = {
-      // userName: 'John Doe',
-      // userEmail: 'john.doe@example.com',
-      // userPhone: '1234567890',
+     
       userId:user,
       meals: formattedItems,
        totalAmount: calculateTotal(),
-     
+     name:studentName,
       discount,
       walletBalanceUsed: isWalletUsed ? walletBalance : 0,
       paymentDetails, 

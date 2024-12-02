@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { baseURL } from '../../common/api';
+import Sidebar from '../../components/Admin/Sidebar';
 
 const RevenueDashboard = () => {
   const [revenue, setRevenue] = useState({
@@ -30,8 +31,11 @@ const RevenueDashboard = () => {
   }, []);
 
   return (
+    <div className="flex flex-col md:flex-row">
+        <Sidebar className="hidden md:block" />
+        {/* <ToastContainer /> */}
     <div className="container p-6">
-      <h1 className="text-2xl font-bold mb-6">Revenue Dashboard</h1>
+      <h1 className="text-2xl text-center font-bold mb-6">Revenue </h1>
 
       {/* Time Period Selection */}
       <div className="mb-4">
@@ -70,6 +74,7 @@ const RevenueDashboard = () => {
           </div>
         </div>
       {/* )} */}
+    </div>
     </div>
   );
 };

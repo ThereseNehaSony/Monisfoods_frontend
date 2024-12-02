@@ -118,8 +118,8 @@ const ViewMenus = () => {
         <ToastContainer position="top-right" />
 
         <div className="max-w-7xl mx-auto">
-          <div className="flex justify-between items-center mb-6">
-            <h1 className="text-2xl font-bold text-gray-900">View Menus</h1>
+        <div className="flex flex-col w-full p-6">
+            <h1 className="text-2xl font-bold text-center  text-gray-900">View Menu</h1>
           </div>
 
           <div className="mb-6">

@@ -32,6 +32,9 @@ const initialState = {
   token: localStorage.getItem('token') || null,
   loading: false,
   error: null,
+  otpSent: false,
+  otpVerified: false,
+  passwordSet: false,
 };
 
 const authSlice = createSlice({
@@ -69,10 +72,48 @@ const authSlice = createSlice({
       localStorage.removeItem('user');
       localStorage.removeItem('role');
     },
+    sendOtpRequest: (state) => {
+      state.loading = true;
+      state.error = null;
+      state.otpSent = false;
+    },
+    sendOtpSuccess: (state) => {
+      state.loading = false;
+      state.otpSent = true;
+    },
+    sendOtpFailure: (state, action) => {
+      state.loading = false;
+      state.error = action.payload.error;
+    },
+    verifyOtpRequest: (state) => {
+      state.loading = true;
+      state.error = null;
+      state.otpVerified = false;
+    },
+    verifyOtpSuccess: (state) => {
+      state.loading = false;
+      state.otpVerified = true;
+    },
+    verifyOtpFailure: (state, action) => {
+      state.loading = false;
+      state.error = action.payload.error;
+    },
+    setPassword: (state,action) => {
+      state.loading = false;
+      state.passwordSet = true;
+    
+      
+    },
   },
 });
 
-export const { loginRequest, loginSuccess, loginFailure, logout } = authSlice.actions;
+export const { loginRequest, loginSuccess, loginFailure, logout,sendOtpRequest,
+  sendOtpSuccess,
+  sendOtpFailure,
+  verifyOtpRequest,
+  verifyOtpSuccess,
+  verifyOtpFailure,
+  setPassword, } = authSlice.actions;
 
 // Add axios interceptor to include token in headers
 // axios.interceptors.request.use(
@@ -87,6 +128,40 @@ export const { loginRequest, loginSuccess, loginFailure, logout } = authSlice.ac
 //     return Promise.reject(error);
 //   }
 // );
+
+
+export const sendOtp = (email,role) => async (dispatch) => {
+  dispatch(sendOtpRequest());
+
+  try {
+    await api.post('/api/auth/send-otp', { email,role});
+    dispatch(sendOtpSuccess());
+  } catch (error) {
+    dispatch(sendOtpFailure({ error: error.response?.data?.message || 'Failed to send OTP' }));
+  }
+};
+
+export const verifyOtp = (email, otp,role) => async (dispatch) => {
+  dispatch(verifyOtpRequest());
+
+  try {
+    const response = await api.post('/api/auth/verify-otp', { email, otp ,role});
+    dispatch(verifyOtpSuccess());
+  } catch (error) {
+    dispatch(verifyOtpFailure({ error: error.response?.data?.message || 'OTP verification failed' }));
+  }
+};
+
+export const setUserPassword = (email, password,role) => async (dispatch) => {
+  dispatch(sendOtpRequest());
+
+  try {
+    await api.post('/api/auth/create-password', { email, password,role });
+    dispatch(setPassword());
+  } catch (error) {
+    dispatch(sendOtpFailure({ error: error.response?.data?.message || 'Failed to set password' }));
+  }
+};
 
 // Create a function to verify token
 export const verifyToken = () => async (dispatch) => {
@@ -109,12 +184,12 @@ export const verifyToken = () => async (dispatch) => {
   }
 };
 
-export const loginUser = ({ mobileNumber, password }) => async (dispatch) => {
+export const loginUser = ({ email, password }) => async (dispatch) => {
   dispatch(loginRequest());
   
   try {
     const response = await api.post('/api/auth/login/password', {
-      mobileNumber,
+      email,
       password
     });
     

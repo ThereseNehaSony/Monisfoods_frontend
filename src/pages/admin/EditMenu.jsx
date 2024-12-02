@@ -12,65 +12,38 @@ const EditMenus = () => {
     endDate: new Date(new Date().setDate(new Date().getDate() + 6)).toISOString().split("T")[0],
   });
   const [availableItems, setAvailableItems] = useState([]);
-  const [availableMeals, setAvailableMeals] = useState([
-    "Pancakes",
-    "Omelette",
-    "Salad",
-    "Pizza",
-    "Sandwich",
-    "Soup",
-  ]);
 
   useEffect(() => {
     axios.get(`${baseURL}/api/admin/menu-items`)
       .then((response) => {
-        console.log(response.data, "items")
         setAvailableItems(response.data);
       })
       .catch((error) => {
-        console.error("Error fetching available items", error);
         toast.error("Failed to fetch menu items");
       });
   }, []);
 
-
   const fetchWeeklyMenus = async (startDate, endDate) => {
+    setLoading(true);
     try {
-      setLoading(true);
       const response = await fetch(
-        `${baseURL}/api/admin/weekly-menu?startDate=${startDate}&endDate=${endDate}`,
-        {
-          headers: {
-            Accept: "application/json",
-            "Content-Type": "application/json",
-          },
-        }
+        `${baseURL}/api/admin/weekly-menu?startDate=${startDate}&endDate=${endDate}`
       );
 
       const data = await response.json();
+      if (!response.ok) throw new Error(data.message || "Failed to fetch weekly menus");
 
-      if (!response.ok) {
-        throw new Error(data.message || "Failed to fetch weekly menus");
-      }
+      const formattedMenus = Object.entries(data).map(([date, meals]) => ({
+        date,
+        meals: {
+          breakfast: meals.breakfast || [],
+          lunch: meals.lunch || [],
+          snack: meals.snack || [],
+        },
+      })).sort((a, b) => new Date(a.date) - new Date(b.date));
 
-      if (data && Object.keys(data).length > 0) {
-        const formattedMenus = Object.entries(data)
-          .map(([date, meals]) => ({
-            date,
-            meals: {
-              breakfast: meals.breakfast || [],
-              lunch: meals.lunch || [],
-              snack: meals.snack || [],
-            },
-          }))
-          .sort((a, b) => new Date(a.date) - new Date(b.date));
-
-        setMenus(formattedMenus);
-      } else {
-        setMenus([]);
-      }
+      setMenus(formattedMenus);
     } catch (error) {
-      console.error("Weekly menu fetch error:", error);
       toast.error(error.message || "Failed to fetch weekly menus");
       setMenus([]);
     } finally {
@@ -87,7 +60,9 @@ const EditMenus = () => {
               meals: {
                 ...menu.meals,
                 [mealType]: menu.meals[mealType].map((item, idx) =>
-                  idx === index ? { ...item, name: value } : item
+                  idx === index
+                    ? availableItems.find((availableItem) => availableItem._id === value)
+                    : item
                 ),
               },
             }
@@ -95,10 +70,10 @@ const EditMenus = () => {
       )
     );
   };
+  
 
   const handleSaveChanges = async () => {
     try {
-      // Make an API call to save changes to the backend
       const response = await fetch(`${baseURL}/api/admin/update-weekly-menu`, {
         method: "POST",
         headers: {
@@ -109,14 +84,10 @@ const EditMenus = () => {
       });
 
       const data = await response.json();
-
-      if (!response.ok) {
-        throw new Error(data.message || "Failed to save changes");
-      }
+      if (!response.ok) throw new Error(data.message || "Failed to save changes");
 
       toast.success("Menu updated successfully!");
     } catch (error) {
-      console.error("Save menu error:", error);
       toast.error(error.message || "Failed to save changes");
     }
   };
@@ -126,21 +97,24 @@ const EditMenus = () => {
   }, [weekRange]);
 
   const renderMealItems = (date, mealType, items) => {
-    if (!items || items.length === 0) {
+    if (!items.length) {
       return <p className="text-gray-500 italic">No items added</p>;
     }
 
     return items.map((item, index) => (
       <div key={index} className="bg-gray-50 p-4 rounded-lg border border-gray-200 mb-2">
         <select
-          value={item.name}
+          value={item._id}
           onChange={(e) => handleMealChange(date, mealType, index, e.target.value)}
           className="border px-2 py-1 rounded w-full"
         >
-           {availableItems.map((item) => (
-              <option key={item._id} value={item._id}>
-                {item.name} 
-              </option>
+          <option value={item._id} disabled>
+            {item.name}
+          </option>
+          {availableItems.map((availableItem) => (
+            <option key={availableItem._id} value={availableItem._id}>
+              {availableItem.name}
+            </option>
           ))}
         </select>
       </div>
@@ -162,15 +136,9 @@ const EditMenus = () => {
           {menus.map((menu, index) => (
             <tr key={index} className="bg-white hover:bg-gray-50">
               <td className="px-4 py-2 border">{new Date(menu.date).toLocaleDateString()}</td>
-              <td className="px-4 py-2 border">
-                {renderMealItems(menu.date, "breakfast", menu.meals.breakfast)}
-              </td>
-              <td className="px-4 py-2 border">
-                {renderMealItems(menu.date, "lunch", menu.meals.lunch)}
-              </td>
-              <td className="px-4 py-2 border">
-                {renderMealItems(menu.date, "snack", menu.meals.snack)}
-              </td>
+              <td className="px-4 py-2 border">{renderMealItems(menu.date, "breakfast", menu.meals.breakfast)}</td>
+              <td className="px-4 py-2 border">{renderMealItems(menu.date, "lunch", menu.meals.lunch)}</td>
+              <td className="px-4 py-2 border">{renderMealItems(menu.date, "snack", menu.meals.snack)}</td>
             </tr>
           ))}
         </tbody>
@@ -184,9 +152,9 @@ const EditMenus = () => {
       <div className="flex-1 p-6">
         <ToastContainer position="top-right" />
 
-        <div className="max-w-7xl mx-auto">
-          <div className="flex justify-between items-center mb-6">
-            <h1 className="text-2xl font-bold text-gray-900">Edit Weekly Menus</h1>
+        <div className="max-w-7xl mx-auto"><div className="flex flex-col w-full p-6">
+            
+            <h1 className="text-2xl font-bold text-center text-gray-900">Edit Menu</h1>
           </div>
 
           <div className="mb-6">
