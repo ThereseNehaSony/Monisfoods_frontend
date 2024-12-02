@@ -74,10 +74,10 @@ const UsersPage = () => {
     <div className="flex">
       <Sidebar />
       <div className="flex-grow p-8 bg-gray-100 min-h-screen">
-        <h2 className="text-xl font-bold text-center mb-4">Students</h2>
+        <h2 className="text-xl font-bold text-center mb-4 ">Students</h2>
         <table className="min-w-full bg-white border border-gray-300 rounded-lg shadow-md mb-6">
           <thead>
-            <tr className="bg-gray-200 text-left">
+            <tr className="bg-[#eb671c] text-left">
               <th className="px-4 py-2 border-b">Name</th>
               <th className="px-4 py-2 border-b">Class</th>
               <th className="px-4 py-2 border-b">School</th>
@@ -112,7 +112,7 @@ const UsersPage = () => {
         <h2 className="text-xl font-bold text-center mt-8 mb-4">Teachers</h2>
         <table className="min-w-full bg-white border border-gray-300 rounded-lg shadow-md">
           <thead>
-            <tr className="bg-gray-200 text-left">
+            <tr className="bg-[#eb671c] text-left">
               <th className="px-4 py-2 border-b">Mobile</th>
               <th className="px-4 py-2 border-b">Name</th>
               <th className="px-4 py-2 border-b">Email</th>

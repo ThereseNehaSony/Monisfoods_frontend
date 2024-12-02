@@ -42,9 +42,9 @@ const WalletPage = () => {
       <h2 className="text-3xl font-semibold text-center text-gray-800 mb-8">Your Wallet</h2>
 
       
-      <div className="bg-blue-100 p-6 rounded-lg shadow-md mb-8 text-center">
-        <h3 className="text-2xl font-semibold text-blue-700">Wallet Balance</h3>
-        <p className="text-4xl font-bold text-blue-900 mt-2">₹ {balance}</p>
+      <div className="bg-[#320e0e]  p-6 rounded-lg shadow-md mb-8 text-center">
+        <h3 className="text-2xl font-semibold text-white">Wallet Balance</h3>
+        <p className="text-4xl font-bold text-white mt-2">₹ {balance}</p>
      
       </div>
 

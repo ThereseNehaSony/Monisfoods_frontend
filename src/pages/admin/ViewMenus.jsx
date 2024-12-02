@@ -84,7 +84,7 @@ const ViewMenus = () => {
     <div className="overflow-x-auto bg-white shadow-lg rounded-lg">
       <table className="min-w-full table-auto border-collapse border border-gray-200">
         <thead>
-          <tr className="bg-gray-50">
+          <tr className="bg-[#eb671c]">
             <th className="px-4 py-2 border text-left">Week</th>
             <th className="px-4 py-2 border text-left">Breakfast</th>
             <th className="px-4 py-2 border text-left">Lunch</th>

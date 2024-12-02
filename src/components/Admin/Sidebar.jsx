@@ -71,7 +71,7 @@ const Sidebar = () => {
                 Users
               </Link>
             </li>
-            <li>
+            {/* <li>
               <Link
                 to="/admin/revenue"
                 className="block px-4 py-2 hover:bg-gray-700"
@@ -79,7 +79,7 @@ const Sidebar = () => {
               >
                 Revenue
               </Link>
-            </li>
+            </li> */}
             <li>
               <Link
                 to="/admin/bookings"
@@ -156,7 +156,7 @@ const Sidebar = () => {
                 Coupons
               </Link>
             </li>
-            <li>
+            {/* <li>
               <Link
                 to="/admin/transactions"
                 className="block px-4 py-2 hover:bg-gray-700"
@@ -164,7 +164,7 @@ const Sidebar = () => {
               >
                 Transactions
               </Link>
-            </li>
+            </li> */}
             <li>
               <button
                 className="block px-4 py-2 hover:bg-gray-700"

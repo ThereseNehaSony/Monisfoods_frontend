@@ -49,27 +49,34 @@ const calculateTotal = () => {
     return total; 
   };
   const total = calculateTotal();
+
+  
   const handleApplyCoupon = async () => {
     try {
       const response = await axios.post(`${baseURL}/api/admin/coupons/validate`, {
         code: couponCode,
+        userId: user, // Ensure 'user' contains the valid user ID
       });
-   
-      if (response.data.success) {
-        const { discountAmount, newWalletBalance } = response.data;
-        setDiscount(discountAmount);
-        setWalletBalance(response.data.walletBalance);
+  
+      const { message, discountAmount, walletBalance } = response.data;
+  
+      if (response.status === 200) {
+        setDiscount(discountAmount); // Update discount
+        setWalletBalance(walletBalance); // Update wallet balance
         setIsCouponApplied(true);
-        toast.success(`Coupon applied! ₹${discountAmount} added to wallet.`)
-       
+        toast.success(`Coupon applied! ₹${discountAmount} added to wallet.`);
+  
+        // Update totalAmount based on the new discount
+        setTotalAmount(calculateTotal(discountAmount));
       } else {
-        alert(response.data.message || "Invalid coupon.");
+        toast.error(message || "Invalid coupon.");
       }
     } catch (error) {
       console.error("Error applying coupon:", error);
       toast.error("Failed to apply coupon.");
     }
   };
+  
   
   
   const handleShowCoupons = async () => {
@@ -114,37 +121,37 @@ const calculateTotal = () => {
 
   
   const handleBooking = async (paymentDetails) => {
+    const totalAfterDiscount = calculateTotal() + (isWalletUsed ? walletBalance : 0); // Add back wallet balance deduction
+  
     const formattedItems = {
       breakfast: selectedItems.breakfast
         ? Object.keys(selectedItems.breakfast).map((itemName) => ({
             name: itemName,
             details: selectedItems.breakfast[itemName],
           }))
-        : [], // Return an empty array if no breakfast items are selected
+        : [],
       lunch: selectedItems.lunch
         ? Object.keys(selectedItems.lunch).map((itemName) => ({
             name: itemName,
             details: selectedItems.lunch[itemName],
           }))
-        : [], // Return an empty array if no lunch items are selected
+        : [],
       snack: selectedItems.snack
         ? Object.keys(selectedItems.snack).map((itemName) => ({
             name: itemName,
             details: selectedItems.snack[itemName],
           }))
-        : [], // Return an empty array if no snack items are selected
+        : [],
     };
-    
   
     const bookingData = {
-     
-      userId:user,
+      userId: user,
       meals: formattedItems,
-       totalAmount: calculateTotal(),
-     name:studentName,
+      totalAmount: totalAfterDiscount, // Send total after applying the discount
+      name: studentName,
       discount,
       walletBalanceUsed: isWalletUsed ? walletBalance : 0,
-      paymentDetails, 
+      paymentDetails,
     };
   
     try {
@@ -157,6 +164,7 @@ const calculateTotal = () => {
       toast.error('Failed to create booking');
     }
   };
+  
   const handleRazorpayPayment = async () => {
     try {
       const totalAmount = calculateTotal();

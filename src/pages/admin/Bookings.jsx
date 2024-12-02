@@ -156,7 +156,7 @@ const AdminBookingsCategorized = () => {
       <Sidebar className="w-full md:w-1/4 bg-gray-800 text-white" />
 
       <div className="flex-1 p-4">
-      <h2 className="text-xl font-bold text-center mt-8 mb-4">Booking</h2>
+      <h2 className="text-xl font-bold text-center mt-8 mb-4">Bookings</h2>
 
         {/* Filter Section */}
         <div className="mb-6 flex flex-wrap gap-4">
@@ -213,7 +213,7 @@ const AdminBookingsCategorized = () => {
           categorizedBookings.map((category) => (
             <div
               key={`${category._id.mealType}-${category._id.date}`}
-              className="mb-8"
+              className="mb-8 "
             >
               <h3 className="text-lg font-semibold">
                 {category._id.mealType.toUpperCase()} - {category._id.date}
@@ -221,7 +221,7 @@ const AdminBookingsCategorized = () => {
               {category.bookings.map((booking) => (
                 <div
                   key={booking._id}
-                  className="border border-gray-300 rounded-lg p-4 mb-4 shadow-md"
+                  className="border border-gray-300 bg-[#eb671c] rounded-lg p-4 mb-4 shadow-md"
                 >
                   <div>
                     <strong>Item:</strong> {booking.itemDetails?.name || 'N/A'}

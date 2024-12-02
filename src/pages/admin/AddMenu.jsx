@@ -272,7 +272,7 @@ const WeeklyMenu = () => {
 
         <button
           onClick={handleSaveMenu}
-          className="bg-green-500 text-white px-4 py-2 rounded-md hover:bg-green-600"
+          className="bg-[#eb671c] text-white px-4 py-2 rounded-md hover:bg-green-600"
         >
           Save Menu
         </button>

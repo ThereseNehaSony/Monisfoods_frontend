@@ -125,7 +125,7 @@ const EditMenus = () => {
     <div className="overflow-x-auto bg-white shadow-lg rounded-lg">
       <table className="min-w-full table-auto border-collapse border border-gray-200">
         <thead>
-          <tr className="bg-gray-50">
+          <tr className="bg-[#eb671c]">
             <th className="px-4 py-2 border text-left">Week</th>
             <th className="px-4 py-2 border text-left">Breakfast</th>
             <th className="px-4 py-2 border text-left">Lunch</th>
@@ -153,17 +153,17 @@ const EditMenus = () => {
         <ToastContainer position="top-right" />
 
         <div className="max-w-7xl mx-auto"><div className="flex flex-col w-full p-6">
-            
+
             <h1 className="text-2xl font-bold text-center text-gray-900">Edit Menu</h1>
           </div>
 
           <div className="mb-6">
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 ">
               <input
                 type="date"
                 value={weekRange.startDate}
                 onChange={(e) => setWeekRange((prev) => ({ ...prev, startDate: e.target.value }))}
-                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 "
               />
               <input
                 type="date"
@@ -184,7 +184,7 @@ const EditMenus = () => {
               <div className="flex justify-end mt-4">
                 <button
                   onClick={handleSaveChanges}
-                  className="bg-blue-500 text-white px-6 py-2 rounded-lg hover:bg-blue-600"
+                  className="bg-[#320e0e] text-white px-6 py-2 rounded-lg hover:bg-blue-600"
                 >
                   Save Changes
                 </button>

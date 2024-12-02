@@ -63,7 +63,7 @@ const CouponManagement = () => {
 
       <button
         onClick={() => setIsModalOpen(true)}
-        className="bg-blue-500 text-white py-2 px-4 ml-2 rounded-md hover:bg-blue-600"
+        className="bg-[#eb671c] text-white py-2 px-4 ml-2 rounded-md hover:bg-blue-600"
       >
         Add Coupon
       </button>
@@ -72,10 +72,10 @@ const CouponManagement = () => {
       <div className="mt-6 ml-2 mr-2">
         <table className="w-full table-auto border-collapse border border-gray-300">
           <thead>
-            <tr className="bg-gray-100">
-              <th className="border border-gray-300 px-4 py-2">Code</th>
-              <th className="border border-gray-300 px-4 py-2">Discount</th>
-              <th className="border border-gray-300 px-4 py-2">Expiry Date</th>
+            <tr className="bg-[#320e0e]">
+              <th className="border text-white border-gray-300 px-4 py-2">Code</th>
+              <th className="border text-white border-gray-300 px-4 py-2">Discount</th>
+              <th className="border text-white border-gray-300 px-4 py-2">Expiry Date</th>
             </tr>
           </thead>
           <tbody>
@@ -144,7 +144,7 @@ const CouponManagement = () => {
               </button>
               <button
                 onClick={handleAddCoupon}
-                className="bg-blue-500 text-white py-2 px-6 rounded-full hover:bg-blue-400 transition duration-300"
+                className="bg-[#eb671c] text-white py-2 px-6 rounded-full hover:bg-blue-400 transition duration-300"
               >
                 Add Coupon
               </button>

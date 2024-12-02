@@ -47,20 +47,20 @@ const OrderHistoryPage = () => {
           {orders.map((order) => (
             <div
               key={order._id}
-              className="bg-white shadow-lg rounded-lg overflow-hidden transform hover:scale-105 transition-transform duration-300"
+              className="bg-[#320e0e]  shadow-lg rounded-lg overflow-hidden transform hover:scale-105 transition-transform duration-300"
             >
               <div className="p-6">
-                <h3 className="text-2xl font-semibold text-gray-800">Order #{order._id}</h3>
-                <p className="text-sm text-gray-600 mt-1">Order Date: {new Date(order.createdAt).toLocaleDateString()}</p>
-                <p className="text-sm text-gray-600 mt-1">Order for: {order?.name}</p>
-                <p className="text-sm text-gray-600 mt-1">Meal Date: {new Date(order?.mealDate).toLocaleDateString()}</p>
+                <h3 className="text-2xl font-semibold text-white">Order #{order._id}</h3>
+                <p className="text-sm text-white mt-1">Order Date: {new Date(order.createdAt).toLocaleDateString()}</p>
+                <p className="text-sm text-white mt-1">Order for: {order?.name}</p>
+                <p className="text-sm text-white mt-1">Meal Date: {new Date(order?.mealDate).toLocaleDateString()}</p>
 
                 <div className="mt-4">
                   {Object.keys(order.selectedItems).map((mealType) => (
                     <div key={mealType}>
-                      <h4 className="text-xl font-semibold text-gray-700">{mealType.charAt(0).toUpperCase() + mealType.slice(1)}</h4>
+                      <h4 className="text-xl font-semibold text-white">{mealType.charAt(0).toUpperCase() + mealType.slice(1)}</h4>
                       {order.selectedItems[mealType].map((item, index) => (
-                        <div key={index} className="flex justify-between mt-2">
+                        <div key={index} className="flex justify-between text-white mt-2">
                           <p>{item.name} ({item.details.size})</p>
                           <p>{item.details.quantity} x ₹{item.details.price}</p>
                         </div>
@@ -70,7 +70,7 @@ const OrderHistoryPage = () => {
                 </div>
 
                 {order.discount > 0 && (
-                  <p className="text-sm text-gray-600 mt-2">Discount: ₹{order.discount}</p>
+                  <p className="text-sm text-white mt-2">Discount: ₹{order.discount}</p>
                 )}
               </div>
             </div>

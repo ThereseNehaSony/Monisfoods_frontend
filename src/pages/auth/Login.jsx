@@ -72,7 +72,7 @@ const Login = () => {
         <div className="space-y-4">
           <div className="relative">
             <input
-              type="tel"
+              type="email"
               placeholder="Email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}

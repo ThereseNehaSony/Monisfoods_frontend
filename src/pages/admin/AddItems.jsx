@@ -318,7 +318,11 @@ function AddItems() {
           </table>
         </div>
    )}
+
+
+    <h2 className="text-2xl font-bold mt-7 mb-4 md:mb-6">Schools</h2>
   <div className="max-w-md mx-auto mt-10 p-4 border rounded shadow">
+      
       <h1 className="text-xl font-bold mb-4">Add School</h1>
       <Formik
         initialValues={initialValues}
@@ -345,7 +349,7 @@ function AddItems() {
           </div>
           <button
             type="submit"
-            className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600"
+            className="px-4 py-2 bg-[#320e0e] text-white rounded hover:bg-blue-600"
           >
             Add School
           </button>
@@ -353,22 +357,30 @@ function AddItems() {
       </Formik>
       
     </div>
+
+   
     <button
         onClick={fetchSchools}
-        className="px-4 mt-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600"
+        className="px-4 mt-4 py-2 bg-[#eb671c] text-white rounded hover:bg-blue-600"
       >
         Load Schools
       </button>
 
       {schools.length > 0 && (
-        <ul className="mt-4">
-          {schools.map((school) => (
-            <li key={school._id} className="py-2 border-b">
-              {school.name}
-            </li>
-          ))}
-        </ul>
-      )}
+  <div className="mt-6">
+   
+    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+      {schools.map((school) => (
+        <div key={school._id} className="bg-white p-4 rounded-lg shadow-lg hover:shadow-xl transition duration-300">
+          <h3 className="text-xl font-semibold text-maroon-700">{school.name}</h3>
+       
+          
+        </div>
+      ))}
+    </div>
+  </div>
+)}
+
   </div>
   </div>  
   )
