@@ -188,10 +188,15 @@ export const loginUser = ({ email, password }) => async (dispatch) => {
   dispatch(loginRequest());
   
   try {
-    const response = await api.post('/api/auth/login/password', {
-      email,
-      password
-    });
+    const response = await axios.post(
+      '/api/auth/login/password',
+      { email, password },
+      {
+        headers: {
+          'Content-Type': 'application/json' },
+        withCredentials: true, 
+      }
+    );
     
     dispatch(loginSuccess({ 
       token: response.data.token, 

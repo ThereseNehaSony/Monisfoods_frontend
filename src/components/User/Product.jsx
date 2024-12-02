@@ -145,20 +145,10 @@ const FoodMenu = () => {
     calculateTotalAmount();
   }, [selectedItems]);
 
+  // Handle Booking
   const handleBooking = () => {
-  // Prepare booking details to pass to checkout
-  const bookingDetails = {
-    studentName: studentName,
-    bookingType: bookingType, // 'daily' or 'weekly'
-    targetDate: targetDate, // The date for which meals are being booked
-    selectedItems: selectedItems,
-    totalAmount: totalAmount
+    navigate("/checkout",{ state: { studentName: studentName }});
   };
-
-  navigate("/checkout", { 
-    state: bookingDetails 
-  });
-};
 
   // Check Time Limit for Daily Booking
   const isDailyBookingAvailable = () => {
@@ -261,8 +251,11 @@ const FoodMenu = () => {
       </div>
     ))}
   </div> 
-  )}
   
+  
+      )}
+
+      
 {/* Weekly Menu */}
 {bookingType === "weekly" && (
   <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -274,7 +267,7 @@ const FoodMenu = () => {
         <div className="p-4">
           {/* Loop over meal types (breakfast, lunch, snack) */}
           {['breakfast', 'lunch', 'snack'].map((mealType, i) => {
-            const meals = weeklyMenu[day][mealType]; 
+            const meals = weeklyMenu[day][mealType]; // Get meals for current day and meal type
 
             return meals && meals.length > 0 ? (
               <div key={i} className="mb-8">
