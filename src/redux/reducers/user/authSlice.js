@@ -188,15 +188,10 @@ export const loginUser = ({ email, password }) => async (dispatch) => {
   dispatch(loginRequest());
   
   try {
-    const response = await axios.post(
-      'https://monisfoods-backend.up.railway.app/api/auth/login/password',
-      { email, password },
-      {
-        headers: {
-          'Content-Type': 'application/json' },
-        withCredentials: true, 
-      }
-    );
+    const response = await api.post('/api/auth/login/password', {
+      email,
+      password
+    });
     
     dispatch(loginSuccess({ 
       token: response.data.token, 
