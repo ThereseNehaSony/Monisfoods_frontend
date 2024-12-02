@@ -68,15 +68,7 @@ const toggleMenuItem = () => setMenuItemOpen(!isMenuItemOpen);
                 Dashboard
               </Link>
             </li>
-            <li>
-              <Link
-                to="/admin/users"
-                className="block px-4 py-2 hover:bg-gray-700"
-                onClick={() => setIsOpen(false)}
-              >
-                Users
-              </Link>
-            </li>
+           
             {/* <li>
               <Link
                 to="/admin/revenue"
@@ -219,7 +211,15 @@ const toggleMenuItem = () => setMenuItemOpen(!isMenuItemOpen);
   )}
 </li>
 
-
+<li>
+              <Link
+                to="/admin/users"
+                className="block px-4 py-2 hover:bg-gray-700"
+                onClick={() => setIsOpen(false)}
+              >
+                Users
+              </Link>
+            </li>
 
 
             {/* <li>
