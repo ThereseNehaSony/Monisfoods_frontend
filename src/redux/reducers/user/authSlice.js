@@ -189,7 +189,7 @@ export const loginUser = ({ email, password }) => async (dispatch) => {
   
   try {
     const response = await axios.post(
-      '/api/auth/login/password',
+      'https://monisfoods-backend.up.railway.app/api/auth/login/password',
       { email, password },
       {
         headers: {
