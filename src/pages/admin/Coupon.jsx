@@ -59,7 +59,7 @@ const CouponManagement = () => {
     <div className="flex">
       <Sidebar />
       <div className="flex-grow p-8 bg-gray-100 min-h-screen">
-      <h1 className="text-2xl ml-2 font-bold mb-6">Coupon Management</h1>
+      <h1 className="text-2xl ml-2 text-center font-bold mb-6">Coupon Management</h1>
 
       <button
         onClick={() => setIsModalOpen(true)}
@@ -111,7 +111,7 @@ const CouponManagement = () => {
 
             <div className="mb-4">
               <label className="block text-sm font-medium text-gray-700 mb-1">
-                Discount (%)
+                Discount Amount
               </label>
               <input
                 type="number"

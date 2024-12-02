@@ -173,7 +173,7 @@ function AddItems() {
     
         
           
-        <div className="flex flex-col md:flex-row gap-2 mb-4">
+        {/* <div className="flex flex-col md:flex-row gap-2 mb-4">
           <button
             onClick={() => setShowAddItemModal(true)}
             className="bg-[#320e0e] text-white py-2 px-4 rounded"
@@ -186,7 +186,7 @@ function AddItems() {
           >
             View Available Menus
           </button>
-        </div>
+        </div> */}
 
   {/* Add Item Modal */}
 {showAddItemModal && (
@@ -277,7 +277,7 @@ function AddItems() {
 )}
 
 
-        {showAvailableItemsModal && (
+        {/* {showAvailableItemsModal && ( */}
         <div className="overflow-x-auto">
           
           <table className="table-auto border-collapse border border-gray-300 w-full text-left">
@@ -317,9 +317,9 @@ function AddItems() {
             </tbody>
           </table>
         </div>
-   )}
+   {/* )} */}
 
-
+{/* 
     <h2 className="text-2xl font-bold mt-7 mb-4 md:mb-6">Schools</h2>
   <div className="max-w-md mx-auto mt-10 p-4 border rounded shadow">
       
@@ -361,7 +361,7 @@ function AddItems() {
    
     <button
         onClick={fetchSchools}
-        className="px-4 mt-4 py-2 bg-[#eb671c] text-white rounded hover:bg-blue-600"
+        className="px-4 mt-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600"
       >
         Load Schools
       </button>
@@ -379,7 +379,7 @@ function AddItems() {
       ))}
     </div>
   </div>
-)}
+)} */}
 
   </div>
   </div>  

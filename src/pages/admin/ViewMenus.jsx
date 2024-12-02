@@ -70,39 +70,41 @@ const ViewMenus = () => {
     }
 
     return items.map((item, index) => (
-      <div key={index} className="bg-gray-50 p-4 rounded-lg border border-gray-200">
-        <div className="flex items-start justify-between">
-          <div>
-            <h4 className="font-semibold text-gray-900">{item.name}</h4>
-          </div>
-        </div>
+      <div key={index} className="bg-gray-50 p-2 rounded-lg border border-gray-200 mb-1 text-xs">
+        <h4 className="font-semibold text-gray-900">{item.name}</h4>
       </div>
     ));
   };
 
   const renderTable = () => (
-    <div className="overflow-x-auto bg-white shadow-lg rounded-lg">
+    <div className="overflow-x-auto w-full">
       <table className="min-w-full table-auto border-collapse border border-gray-200">
         <thead>
           <tr className="bg-[#eb671c]">
-            <th className="px-4 py-2 border text-left">Week</th>
-            <th className="px-4 py-2 border text-left">Breakfast</th>
-            <th className="px-4 py-2 border text-left">Lunch</th>
-            <th className="px-4 py-2 border text-left">Snacks</th>
+            <th className="px-2 py-2 border text-left text-xs sm:text-sm">Week</th>
+            <th className="px-2 py-2 border text-left text-xs sm:text-sm">Breakfast</th>
+            <th className="px-2 py-2 border text-left text-xs sm:text-sm">Lunch</th>
+            <th className="px-2 py-2 border text-left text-xs sm:text-sm">Snacks</th>
           </tr>
         </thead>
         <tbody>
           {menus.map((menu, index) => (
             <tr key={index} className="bg-white hover:bg-gray-50">
-              <td className="px-4 py-2 border">{formatDate(menu.date)}</td>
-              <td className="px-4 py-2 border">
-                {renderMealItems(menu.meals.breakfast)}
+              <td className="px-2 py-2 border text-xs sm:text-sm">{formatDate(menu.date)}</td>
+              <td className="px-2 py-2 border text-xs sm:text-sm max-w-[150px]">
+                <div className="overflow-y-auto max-h-32 scrollbar-thin scrollbar-thumb-gray-300">
+                  {renderMealItems(menu.meals.breakfast)}
+                </div>
               </td>
-              <td className="px-4 py-2 border">
-                {renderMealItems(menu.meals.lunch)}
+              <td className="px-2 py-2 border text-xs sm:text-sm max-w-[150px]">
+                <div className="overflow-y-auto max-h-32 scrollbar-thin scrollbar-thumb-gray-300">
+                  {renderMealItems(menu.meals.lunch)}
+                </div>
               </td>
-              <td className="px-4 py-2 border">
-                {renderMealItems(menu.meals.snack)}
+              <td className="px-2 py-2 border text-xs sm:text-sm max-w-[150px]">
+                <div className="overflow-y-auto max-h-32 scrollbar-thin scrollbar-thumb-gray-300">
+                  {renderMealItems(menu.meals.snack)}
+                </div>
               </td>
             </tr>
           ))}
@@ -118,23 +120,23 @@ const ViewMenus = () => {
         <ToastContainer position="top-right" />
 
         <div className="max-w-7xl mx-auto">
-        <div className="flex flex-col w-full p-6">
-            <h1 className="text-2xl font-bold text-center  text-gray-900">View Menu</h1>
+          <div className="flex flex-col w-full p-6">
+            <h1 className="text-2xl font-bold text-center text-gray-900">View Menu</h1>
           </div>
 
           <div className="mb-6">
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <input
                 type="date"
                 value={weekRange.startDate}
                 onChange={(e) => setWeekRange(prev => ({ ...prev, startDate: e.target.value }))}
-                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-xs sm:text-sm"
               />
               <input
                 type="date"
                 value={weekRange.endDate}
                 onChange={(e) => setWeekRange(prev => ({ ...prev, endDate: e.target.value }))}
-                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-xs sm:text-sm"
               />
             </div>
           </div>

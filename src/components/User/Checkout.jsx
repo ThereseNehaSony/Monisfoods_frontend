@@ -512,6 +512,8 @@ const Checkout = () => {
       try {
         const response = await axios.get(`${baseURL}/api/user/wallet/balance?userId=${user}`);
         setWalletBalance(response.data.balance || 0);
+        console.log(response.data.balance);
+        
       } catch (error) {
         toast.error('Failed to fetch wallet balance.');
       }

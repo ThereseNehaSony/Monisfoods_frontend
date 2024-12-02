@@ -20,6 +20,12 @@ const Sidebar = () => {
   };
 
 
+  const [isSchoolMenuOpen, setSchoolMenuOpen] = useState(false);
+const [isMenuItemOpen, setMenuItemOpen] = useState(false);
+
+const toggleSchoolMenu = () => setSchoolMenuOpen(!isSchoolMenuOpen);
+const toggleMenuItem = () => setMenuItemOpen(!isMenuItemOpen);
+
   const handleLogout = () => {
     dispatch(logout());
     navigate("/login");
@@ -129,6 +135,93 @@ const Sidebar = () => {
                 </ul>
               )}
             </li>
+              
+              
+            <li className="relative">
+  <button
+    onClick={toggleSchoolMenu}
+    className="block px-4 py-2 w-full text-left hover:bg-gray-700 flex items-center justify-between"
+  >
+    Schools
+    <FaChevronDown className={`transition-transform ${isSchoolMenuOpen ? 'rotate-180' : ''}`} />
+  </button>
+  {isSchoolMenuOpen && (
+    <ul className="absolute left-0 mt-2 w-full bg-[#eb671c] rounded-lg shadow-lg z-30 max-h-60 overflow-y-auto min-h-[150px]">
+      <li>
+        <Link
+          to="/admin/schools/view"
+          className="block px-4 py-2 hover:bg-gray-700"
+          onClick={() => setIsOpen(false)}
+        >
+          View/Edit Schools
+        </Link>
+      </li>
+      <li>
+        <Link
+          to="/admin/schools/add"
+          className="block px-4 py-2 hover:bg-gray-700"
+          onClick={() => setIsOpen(false)}
+        >
+          Add School
+        </Link>
+      </li>
+      {/* <li>
+        <Link
+          to="/admin/schools/edit"
+          className="block px-4 py-2 hover:bg-gray-700"
+          onClick={() => setIsOpen(false)}
+        >
+          Edit School
+        </Link>
+      </li> */}
+    </ul>
+  )}
+</li>
+
+<li className="relative">
+  <button
+    onClick={toggleMenuItem}
+    className="block px-4 py-2 w-full text-left hover:bg-gray-700 flex items-center justify-between"
+  >
+    Menu Items
+    <FaChevronDown className={`transition-transform ${isMenuItemOpen ? 'rotate-180' : ''}`} />
+  </button>
+  {isMenuItemOpen && (
+    <ul className="absolute left-0 mt-2 w-full bg-[#eb671c] rounded-lg shadow-lg z-30 max-h-60 overflow-y-auto min-h-[150px]">
+      <li>
+        <Link
+          to="/admin/menuitems/view"
+          className="block px-4 py-2 hover:bg-gray-700"
+          onClick={() => setIsOpen(false)}
+        >
+          View/Edit Menu Items
+        </Link>
+      </li>
+      <li>
+        <Link
+          to="/admin/menuitems/add"
+          className="block px-4 py-2 hover:bg-gray-700"
+          onClick={() => setIsOpen(false)}
+        >
+          Add Menu Item
+        </Link>
+      </li>
+      {/* <li>
+        <Link
+          to="/admin/menuitems/edit"
+          className="block px-4 py-2 hover:bg-gray-700"
+          onClick={() => setIsOpen(false)}
+        >
+          Edit Menu Item
+        </Link>
+      </li> */}
+    </ul>
+  )}
+</li>
+
+
+
+
             {/* <li>
               <Link
                 to="/admin/view-menus"
@@ -138,24 +231,7 @@ const Sidebar = () => {
                 View Menus
               </Link>
             </li> */}
-            <li>
-              <Link
-                to="/admin/items"
-                className="block px-4 py-2 hover:bg-gray-700"
-                onClick={() => setIsOpen(false)}
-              >
-                Items
-              </Link>
-            </li>
-            <li>
-              <Link
-                to="/admin/coupons"
-                className="block px-4 py-2 hover:bg-gray-700"
-                onClick={() => setIsOpen(false)}
-              >
-                Coupons
-              </Link>
-            </li>
+           
             {/* <li>
               <Link
                 to="/admin/transactions"

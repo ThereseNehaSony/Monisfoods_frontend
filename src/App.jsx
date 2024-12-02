@@ -35,7 +35,13 @@ import RevenueTracking from "./pages/admin/Revenue";
 import EditMenu from "./pages/admin/EditMenu";
 import AddMenuItem from "./pages/admin/AddMenu";
 import AdminFooter from "./pages/admin/Footer";
-
+import Schools from "./pages/admin/Schools";
+import ViewSchools from "./pages/admin/ViewSchools";
+import AddSchool from "./pages/admin/AddSchool";
+import EditSchool from "./pages/admin/EditSchool";
+import AddItem from "./pages/admin/AddMenuItem";
+import ViewItems from "./pages/admin/ViewMenuItem";
+import EditItem from "./pages/admin/EditMenuItem";
 
 
 const ProtectedRoute = ({ element: Element, allowedRoles, ...props }) => {
@@ -72,7 +78,8 @@ function AppContent() {
   const isTeacherRoute = location.pathname.startsWith("/teacher");
 
   return (
-    <>
+    <div className="min-h-screen flex flex-col">
+    
       <Toaster position="top-center" />
 
       {!isAdminRoute && !isTeacherRoute && <Navbar />}
@@ -281,6 +288,69 @@ function AppContent() {
             />
           }
         />
+         <Route
+          path="/admin/menuitems/add"
+          element={
+            <ProtectedRoute
+              element={AddItem}
+              allowedRoles={['admin']}
+            />
+          }
+        />
+         <Route
+          path="/admin/menuitems/view"
+          element={
+            <ProtectedRoute
+              element={ViewItems}
+              allowedRoles={['admin']}
+            />
+          }
+        />
+         <Route
+          path="/admin/menuitems/edit"
+          element={
+            <ProtectedRoute
+              element={EditItem}
+              allowedRoles={['admin']}
+            />
+          }
+        />
+         <Route
+          path="/admin/schools"
+          element={
+            <ProtectedRoute
+              element={Schools}
+              allowedRoles={['admin']}
+            />
+          }
+        />
+           <Route
+          path="/admin/schools/view"
+          element={
+            <ProtectedRoute
+              element={ViewSchools}
+              allowedRoles={['admin']}
+            />
+          }
+        />
+           <Route
+          path="/admin/schools/add"
+          element={
+            <ProtectedRoute
+              element={AddSchool}
+              allowedRoles={['admin']}
+            />
+          }
+        />
+           <Route
+          path="/admin/schools/edit"
+          element={
+            <ProtectedRoute
+              element={EditSchool}
+              allowedRoles={['admin']}
+            />
+          }
+        />
         <Route
           path="/admin/coupons"
           element={
@@ -313,8 +383,8 @@ function AppContent() {
 
       {!isAdminRoute && !isTeacherRoute && <Footer />}
      
-      {isAdminRoute&& <AdminFooter />}
-    </>
+      {isAdminRoute&& <AdminFooter  />}
+    </div>
   );
 }
 
