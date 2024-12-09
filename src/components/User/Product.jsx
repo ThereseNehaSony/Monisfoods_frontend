@@ -210,7 +210,7 @@ const FoodMenu = () => {
                 className="w-full h-40 object-cover rounded-t-lg mb-4"
               />
               <h3 className="text-lg font-semibold text-gray-800">{item.name}</h3>
-              <p className="text-gray-600 mb-2">{item.description}</p>
+              {/* <p className="text-gray-600 mb-2">{item.description}</p> */}
               <div className="flex justify-between items-center mb-4">
                 {Object.entries(item.portions || {}).map(([size, price]) => (
                   <div key={size} className="flex flex-col space-y-2">
@@ -229,7 +229,7 @@ const FoodMenu = () => {
                 ))}
               </div>
               <div className="flex items-center justify-between">
-                <button
+                {/* <button
                   onClick={() => handleQuantityChange(mealType, item.name, -1)}
                   className="px-4 py-2 bg-gray-300 text-gray-800 rounded hover:bg-gray-400"
                 >
@@ -237,13 +237,13 @@ const FoodMenu = () => {
                 </button>
                 <span className="px-4">
                   {selectedItems[mealType]?.[item.name]?.quantity || 0}
-                </span>
-                <button
+                </span> */}
+                {/* <button
                   onClick={() => handleQuantityChange(mealType, item.name, 1)}
                   className="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700"
                 >
                   +
-                </button>
+                </button> */}
               </div>
             </div>
           ))}
@@ -282,7 +282,7 @@ const FoodMenu = () => {
                         className="w-full h-40 object-cover rounded-t-lg mb-4"
                       />
                       <h3 className="text-lg font-semibold text-gray-800">{meal.name}</h3>
-                      <p className="text-gray-600 mb-2">{meal.description}</p>
+                      {/* <p className="text-gray-600 mb-2">{meal.description}</p> */}
 
                       {/* Loop over portions */}
                       <div className="flex justify-between items-center mb-4">
@@ -305,7 +305,7 @@ const FoodMenu = () => {
 
                       {/* Quantity control buttons */}
                       <div className="flex items-center justify-between">
-                        <button
+                        {/* <button
                           onClick={() => handleQuantityChange(day, meal.name, -1)}
                           className="px-4 py-2 bg-gray-300 text-gray-800 rounded hover:bg-gray-400"
                         >
@@ -313,22 +313,22 @@ const FoodMenu = () => {
                         </button>
                         <span className="px-4">
                           {selectedItems[day]?.[meal.name]?.quantity || 0}
-                        </span>
-                        <button
+                        </span> */}
+                        {/* <button
                           onClick={() => handleQuantityChange(day, meal.name, 1)}
                           className="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700"
                         >
                           +
-                        </button>
+                        </button> */}
                       </div>
                     </div>
                   ))}
                 </div>
               </div>
-            ) : null; // Don't render anything if no meals for this type
+            ) : null;
           })}
           
-          {/* Display a message if no meals available for the day */}
+       
           {['breakfast', 'lunch', 'snack'].every(mealType => !weeklyMenu[day][mealType]?.length) && (
             <p>No meals available for this day.</p>
           )}

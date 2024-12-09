@@ -3,6 +3,7 @@ import axios from 'axios';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Sidebar from '../../components/Admin/Sidebar';
+import { baseURL } from '../../common/api';
 
 function AddItem() {
   const [newItem, setNewItem] = useState({
@@ -10,6 +11,7 @@ function AddItem() {
     description: '',
     portions: { small: '', medium: '', large: '' },
     image: '',
+    category : '',
   });
   const [preview, setPreview] = useState(null);
   const [imageUploaded, setImageUploaded] = useState(false);
@@ -41,15 +43,15 @@ function AddItem() {
   };
 
   const handleAddItem = async () => {
-    if (!newItem.name || !newItem.description) {
-      toast.error('Name and Description are required!');
+    if (!newItem.name || !newItem.description || !newItem.category) {
+      toast.error('Name , Description and Category are required!');
       return;
     }
 
     try {
-      const response = await axios.post(`/api/admin/menu-item`, newItem); // Update baseURL
+      const response = await axios.post(`${baseURL}/api/admin/menu-item`, newItem); // Update baseURL
       toast.success('Item added successfully');
-      setNewItem({ name: '', description: '', portions: { small: '', medium: '', large: '' }, image: '' });
+      setNewItem({ name: '', description: '', portions: { small: '', medium: '', large: '' },category, image: '' });
       setPreview(null);
       setImageUploaded(false);
     } catch (error) {
@@ -78,6 +80,21 @@ function AddItem() {
         onChange={(e) => handleNewItemChange('description', e.target.value)}
         className="p-2 border rounded mb-2 w-full"
       />
+       <div className="mb-4">
+          <label className="block mb-2 font-semibold">Category</label>
+          <select
+            value={newItem.category}
+            onChange={(e) => handleNewItemChange('category', e.target.value)}
+            className="p-2 border rounded w-full"
+          >
+            <option value="" disabled>
+              Select Category
+            </option>
+            <option value="Breakfast">Breakfast</option>
+            <option value="Lunch">Lunch</option>
+            <option value="Snack">Snack</option>
+          </select>
+        </div>
       <div className="mb-4">
         <h4 className="text-lg font-semibold mb-2">Portion Sizes</h4>
         {['small', 'medium', 'large'].map((size) => (

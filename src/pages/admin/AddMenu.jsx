@@ -92,36 +92,50 @@ const WeeklyMenu = () => {
         <h2 className="text-2xl text-center font-bold mb-6">Add Menu</h2>
 
         {/* Date Range Selection */}
-        <div className="mb-6 flex flex-col md:flex-row gap-4">
-          <div className="flex flex-col">
-            <label htmlFor="startDate" className="font-medium">
-              Start Date
-            </label>
-            <input
-              id="startDate"
-              type="date"
-              value={dateRange.startDate}
-              onChange={(e) =>
-                setDateRange((prev) => ({ ...prev, startDate: e.target.value }))
-              }
-              className="border border-gray-300 rounded-md p-2 mt-1"
-            />
-          </div>
-          <div className="flex flex-col">
-            <label htmlFor="endDate" className="font-medium">
-              End Date
-            </label>
-            <input
-              id="endDate"
-              type="date"
-              value={dateRange.endDate}
-              onChange={(e) =>
-                setDateRange((prev) => ({ ...prev, endDate: e.target.value }))
-              }
-              className="border border-gray-300 rounded-md p-2 mt-1"
-            />
-          </div>
-        </div>
+       {/* Date Range Selection */}
+<div className="mb-6 flex flex-col md:flex-row gap-4">
+  <div className="flex flex-col">
+    <label htmlFor="startDate" className="font-medium">
+      Start Date
+    </label>
+    <input
+      id="startDate"
+      type="date"
+      value={dateRange.startDate}
+      min={new Date().toISOString().split("T")[0]} // Disable past dates
+      onChange={(e) => {
+        const selectedDate = e.target.value;
+        if (dateRange.endDate && selectedDate > dateRange.endDate) {
+          toast.error("Start date cannot be later than the end date");
+          return;
+        }
+        setDateRange((prev) => ({ ...prev, startDate: selectedDate }));
+      }}
+      className="border border-gray-300 rounded-md p-2 mt-1"
+    />
+  </div>
+  <div className="flex flex-col">
+    <label htmlFor="endDate" className="font-medium">
+      End Date
+    </label>
+    <input
+      id="endDate"
+      type="date"
+      value={dateRange.endDate}
+      min={dateRange.startDate || new Date().toISOString().split("T")[0]} // End date can't be before the start date
+      onChange={(e) => {
+        const selectedDate = e.target.value;
+        if (dateRange.startDate && selectedDate < dateRange.startDate) {
+          toast.error("End date cannot be earlier than the start date");
+          return;
+        }
+        setDateRange((prev) => ({ ...prev, endDate: selectedDate }));
+      }}
+      className="border border-gray-300 rounded-md p-2 mt-1"
+    />
+  </div>
+</div>
+
 
         {/* Add Menu Items */}
         <div className="flex flex-wrap gap-4 mb-6">
@@ -152,9 +166,9 @@ const WeeklyMenu = () => {
             ))}
           </select>
 
-          <select
-            value={selectedItem} // This should store the selected item's _id
-            onChange={(e) => setSelectedItem(e.target.value)} // Sets the selected item's _id
+          {/* <select
+            value={selectedItem} 
+            onChange={(e) => setSelectedItem(e.target.value)}
             style={{ padding: "8px", border: "1px solid #ccc", flex: "2" }}
           >
             <option value="" disabled>
@@ -162,10 +176,28 @@ const WeeklyMenu = () => {
             </option>
             {availableItems.map((item) => (
               <option key={item._id} value={item._id}>
-                {item.name} {/* Display the item's name */}
+                {item.name} 
               </option>
             ))}
-          </select>
+          </select> */}
+
+<select
+  value={selectedItem}
+  onChange={(e) => setSelectedItem(e.target.value)}
+  style={{ padding: "8px", border: "1px solid #ccc", flex: "2" }}
+>
+  <option value="" disabled>
+    Select Item
+  </option>
+  {availableItems
+    .filter((item) => item.category === selectedType) // Filter items by the selected type
+    .map((item) => (
+      <option key={item._id} value={item._id}>
+        {item.name}
+      </option>
+    ))}
+</select>
+
 
           <button
             onClick={handleAddItem}
